@@ -118,7 +118,7 @@ Se trabajará con datos de la encuesta CEP (2025) más recientes (Marzo-Abril, 2
 - Nivel socioeconómico
 
 # Referencias
-Acemoglu, D., Naidu, S., Restrepo, P., & Robinson, J. A. (2019). Democracy Does Cause Growth. Https://Doi.Org/10.1086/700936 , 127 (1), 47–100. https://doi.org/10.1086/700936.
+Acemoglu, D., Naidu, S., Restrepo, P., & Robinson, J. A. (2019). Democracy Does Cause Growth. Journal of Political Economy, 127 (1), 47–100. https://doi.org/10.1086/700936.
 
 
 Alister Sanhueza, C., Cea Sánchez, C., & Guerrero Chinga, A. (2015). Democracia en Latinoamérica ¿ qué factores influyen en la satisfacción y apoyo a la democracia? Fronteras , II (1), 85–113.
