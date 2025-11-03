@@ -150,6 +150,7 @@ Sepúlveda Rodríguez, I. (2021). Análisis de los Factores que influyen en las 
 
 <details>
 <summary>CODIGO Y PASOS DE ANALISIS</summary>
+  
 # **Codigo y Pasos de Análisis**
 
 ---
