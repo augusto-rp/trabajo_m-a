@@ -1,3 +1,7 @@
+<details>
+<summary>ANTECEDENES TEORICOS</summary>
+
+
 # Antecedentes teóricos
 Easton (1965) distingue entre dos tipos de apoyos a la democracia.
 
@@ -139,3 +143,16 @@ Krasil’nikova, M. (2022). Subjective Perception of Economic Performance: Ongoi
 
 
 Sepúlveda Rodríguez, I. (2021). Análisis de los Factores que influyen en las Actitudes de Apoyo a la Democracia como Sistema de Gobierno en Chile y Uruguay (2016-2018) [Tesis de Magíster en Gestión y Políticas Públicas]. Universidad de Chile.# trabajo_m-a
+
+</details>
+
+
+
+<details>
+<summary>CODIGO Y PASOS DE ANALISIS</summary>
+# **Codigo y Pasos de Análisis**
+
+---
+
+
+</details>
