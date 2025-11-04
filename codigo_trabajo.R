@@ -8,6 +8,7 @@ library(corrplot) #graficos correlaciones
 library(dplyr) #pq es bacan tenerla abierta
 library(MVN) #normalidad multivariada para LPA
 library(poLCA) #clases latentes
+library(gmodels) #tabla de contingencias y chi cuadrado
 
 base<-read.csv("bd/base_93.csv", header=T)
 #Vamos a hacer una seleccion de las variables que nos interesan
@@ -113,7 +114,7 @@ df$eval_gob_1 <- ifelse(df$eval_gob_1 == 1, 3, #APRUEBA ES 3
 
 describe(df)
 #democracia_21 mean 2.09
-#percepcion_4 2.81 como referencias
+#percepcion_4 1.81 como referencias
 
 #tabla de frecuencia de percepcion
 table(df$percepcion_2)
@@ -253,6 +254,7 @@ df$percepcion_2<-as.numeric(df$percepcion_2)
 df$percepcion_3<-as.numeric(df$percepcion_3)
 df$percepcion_5<-as.numeric(df$percepcion_5)
 df$percepcion_6<-as.numeric(df$percepcion_6)
+df$sexo<-as.factor(df$sexo)
 
 ##Recomendaciones de Spurk et al. (2020) para perfiles latentes
 #1. Seleccionar variables observadas y supuestos
@@ -272,10 +274,13 @@ variables<- cbind(percepcion_2, percepcion_3, percepcion_5, percepcion_6) ~ 1 #(
 #PROCEDA CON CONSIDERACION A ESO
 
 set.seed(3141)
-objetoLCA_2<-poLCA(variables, df, nclass=2, nrep=500, maxiter=1000, graphs=T)
-objetoLCA_3<-poLCA(variables, df, nclass=3, nrep=500, maxiter=1000, graphs=T)
-objetoLCA_4<-poLCA(variables, df, nclass=4, nrep=500, maxiter=1000, graphs=T)
-objetoLCA_5<-poLCA(variables, df, nclass=5, nrep=500, maxiter=1000, graphs=T) #clase con menos de 5
+objetoLCA_2<-poLCA(variables, df, nclass=2, nrep=100, maxiter=1000, graphs=T)
+set.seed(3141)
+objetoLCA_3<-poLCA(variables, df, nclass=3, nrep=100, maxiter=1000, graphs=T)
+set.seed(3141)
+objetoLCA_4<-poLCA(variables, df, nclass=4, nrep=100, maxiter=1000, graphs=T)
+set.seed(3141)
+objetoLCA_5<-poLCA(variables, df, nclass=5, nrep=100, maxiter=1000, graphs=T) #clase con menos de 5
 objetoLCA_6<-poLCA(variables, df, nclass=6, nrep=50, maxiter=1000, graphs=T) #no converge!!!
 
 #3. Comparar ajuste de modelos usando AIC, BIC, SABIC, LMR-LRT, BLRT y Entropia
@@ -297,7 +302,10 @@ n_clases #bic castiga ams en muestras grandes
 #comparar ajuste modelos de 2 a 5 clases
 
 
+
+
 #4. Seleccionar modelo optimo considerando ajuste estadistico y interpretabilidad
+#VALORES CON 500 REPETICIONES POR MODELO
 #cantidad indice    valor
 #1       2c    aic 11214.06
 #2       3c    aic 11138.78
@@ -308,13 +316,80 @@ n_clases #bic castiga ams en muestras grandes
 #7       4c    bic 11425.42
 #8       5c    bic 11501.09
 
+rm(list=c("cor_matrix", "cor_matrix2","objetoLCA_2","objetoLCA_5","objetoLCA_6", "mr"))
+
+poLCA.entropy(objetoLCA_3) #valores no estandrizados ni normalizados, mas alto es mejor
+poLCA.entropy(objetoLCA_4)
+
+objetoLCA_3
+
+#Modelos son muy parecidos, el Bic es sin duda mejor en el de 3.
+#Ver que se gana en interpretabilidad
 
 #5. Interpretar perfiles y asignar nombres
 
+#Modelo de 3
+#CLASE 1 24.47% -OPTIMISTA A FUTURO
+#Clase 1 mayor probabilidad de situacion economica economica del pais promedio o ligeramente mala actual
+  #Clase 1 mayor probbilidad de mejoramiento de situacion economica del pais futura
+    #Clase 1 vision ni buena ni mala o de buena situacion economica personal actual
+      #Clase 1 vision ligeramente optimista de situacion economica futura
+
+#CLASE 2 49.27% -SOSTENIMIENTO
+#Clase 2 mayor probabilidad de situacion economica promedio o ligeramente mala del pais
+#Clase 2 mayoritariamente situaciob del pais se mantendr
+#Clase 2 vision economica personal regular o ligeramente mala actual
+#Clase 2 vision de mantinimiento de situacion economica futura
+
+#CLASE 3 26.26% -PESIMISTAS
+#Clase 3 mayor probabilidad de situacion economica economica del pais mala actual
+  #Clase 3 mayor probbilidad de empeoramientio de situacion economica a futuro
+    #Clase 3 vision ni buena ni mala o ligeramente mala economia personal actual
+      #Clase 3 vision de mantinimiento de situacio economica futura
+
+
+
+
+#SOBRE MODELO DE 4 CLASES
+#CLASE 1 47.56% SOSTENIMIENTO
+#CLASE 2 16.67% OPTIMISTAS
+#CLASE 3 19.76% PESIMISTAS
+#CLASE 4 16.02% PAIS MAL, YO MEJOR , pero en este gusto la vision futura del pais se divide equitativametne
+        #clase 4  **parece** componerse de lo que en otro modelo seria optimistas y pesimistas
+
 #6. Validar perfiles usando variables externas (opcional)
 
+#Crear una columna en df con las clases a que pertenecede cada individuo
+df$clase_3 <- objetoLCA_3$predclass
+df$clase_4 <- objetoLCA_4$predclass
 
 
+#Caracterizacion de sexo  de clase_3 y 4
+table(df$sexo, df$clase_3)
+#usar chi cuadrado para ver distribucion de clases segun sexo
+ct_3<-xtabs(~sexo + clase_3, data=df)
+CrossTable(ct_3,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
+
+
+table(df$sexo, df$clase_4)
+ct<-xtabs(~sexo + clase_4, data=df)
+CrossTable(ct,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
+
+#en ambos grupos dsitribucion es igual a esperada
+
+
+
+# REGRESIONES LINEALES ----------------------------------------------------
+df$clase_3<-as.factor(df$clase_3)
+df$clase_4<-as.factor(df$clase_4)
+
+anova_3 <- aov(democracia_21 ~ clase_3, data = df)
+summary(anova_3) #vviendo las suma de cuadrado no explica nada
+
+ph_3 <- TukeyHSD(anova_3, "clase_3", conf.level = 0.95)
+print(ph_3) #diferencias son entre grupo 3 con el resto
+
+######################################################
 # Mismo analisis tratando datos como continuos -LPA -----------------------
 library(tidyLPA)
 library(mclust)
