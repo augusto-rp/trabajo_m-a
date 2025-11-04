@@ -6,6 +6,8 @@ library(ggplot2) #GRAFICOS
 library(psych) #algunos descriptivos
 library(corrplot) #graficos correlaciones
 library(dplyr) #pq es bacan tenerla abierta
+library(MVN) #normalidad multivariada para LPA
+library(poLCA) #clases latentes
 
 base<-read.csv("bd/base_93.csv", header=T)
 #Vamos a hacer una seleccion de las variables que nos interesan
@@ -19,7 +21,7 @@ base<-read.csv("bd/base_93.csv", header=T)
 #Caracterizacion: sexo (sexo, 1 hombre ),  edad (edad) Y no incluire NSE pues para grupo mas pobre hay muy pocos casos
 #Otras revelantes segun literatura
   ##Aprobacion a gobierno (eval_gob_1)
-  ##Percepcion futuro del pais (percepcion_4)
+  ##Percepcion progreso del pais (percepcion_4)
   
 df <- base[, c("id_bu", "sexo", "edad", "eval_gob_1", "percepcion_2", "percepcion_3", "percepcion_4",  "percepcion_5", "percepcion_6",  "democracia_21","confianza_6_d","confianza_6_i","confianza_6_k","confianza_6_o", "confianza_6_p")]
 
@@ -113,6 +115,12 @@ describe(df)
 #democracia_21 mean 2.09
 #percepcion_4 2.81 como referencias
 
+#tabla de frecuencia de percepcion
+table(df$percepcion_2)
+table(df$percepcion_3)
+table(df$percepcion_5)
+table(df$percepcion_6)
+
 
 # Correlacion entre variables de confianza --------------------------------
 
@@ -188,12 +196,109 @@ df$confianza_i <- (4 + 1) - df$confianza_i #despues de invertir es 1.79
 #CONSTRUIR MATRIZ DE CORRELACIONES ENTRE VARIABLES de percepciob, democracia_21 y confianza_i
 cor_matrix2 <- round(cor(df[, c("percepcion_2", "percepcion_3", "percepcion_4", "percepcion_5", "percepcion_6", "democracia_21", "confianza_i")], use="pairwise.complete.obs"), 2)
 print(cor_matrix2)
-#si aumenta democracia_21 disminuye valo
+
+
+
+color_breaks_full <- c(
+  # Lado Negativo
+  -1.00, -0.51, -0.41, -0.31, -0.21, -0.11,
+  # Cero
+  0.00, 
+  # Lado Positivo (Tus rangos deseados)
+  0.11, 0.21, 0.31, 0.41, 0.51, 1.00
+)
+custom_colors_full <- c(
+  # Colores para la correlación Negativa (Ejemplo: Usando tonos verdes como contraste)
+  "darkgreen",   # -1.00 a -0.51
+  "green4",      # -0.51 a -0.41
+  "yellowgreen", # -0.41 a -0.31
+  "cyan",        # -0.31 a -0.21
+  "darkcyan",    # -0.21 a -0.11
+  "lightgray",   # -0.11 a 0.00 
+  
+  # Colores para la correlación Positiva (Tus colores originales)
+  "lightgray",   # 0.00 a 0.11
+  "lightblue",   # 0.11 a 0.21
+  "blue",        # 0.21 a 0.31
+  "purple",      # 0.31 a 0.41
+  "red4",        # 0.41 a 0.51
+  "red"          # 0.51 a 1.00
+)
+
+corrplot(cor_matrix2, 
+         method = "circle", 
+         type = "upper", 
+         tl.col = "black", 
+         tl.srt = 45,
+         title = "Matriz de Correlaciones entre Confianza en Instituciones",
+         mar = c(0,0,1,0),
+         
+         # --- Nuevos Parámetros de color ---
+         col = custom_colors_full,       # Paleta de colores extendida
+         cl.lim = c(-1, 1),              # Límite extendido para incluir el rango negativo
+         breaks = color_breaks_full      # Puntos de cambio de color extendidos
+)
+
+rm(list=c("color_breaks_full","custom_colors_full"))
 
 #crear archivo cvs con df
 write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
 
 
-# ANALISIS DE PERFILES ----------------------------------------------------
+# ANALISIS DE CLASES ----------------------------------------------------
 
+str(df)
+    #la verdad es que por caracteristicas de escalas usaria LCA con variables categoricas
+df$percepcion_2<-as.numeric(df$percepcion_2)
+df$percepcion_3<-as.numeric(df$percepcion_3)
+df$percepcion_5<-as.numeric(df$percepcion_5)
+df$percepcion_6<-as.numeric(df$percepcion_6)
+
+##Recomendaciones de Spurk et al. (2020) para perfiles latentes
+#1. Seleccionar variables observadas y supuestos
+#Muestra >500, normalidad multivariada. Si no se cumple usar errores robustos
+
+#Evaluacion de normalidad multivariada
+#Primero hace un subset de las variables de interes: percepcion_2, percepcion_3, percepcion_5, percepcion_6
+lpa_data <- df[, c("percepcion_2", "percepcion_3", "percepcion_5", "percepcion_6")]
+mvn(lpa_data)#no hay normalidad multivarida, asi que usar errores robustos
+
+#2. Estimar modelos con diferentes numeros de perfiles (1-6)
+
+variables<- cbind(percepcion_2, percepcion_3, percepcion_5, percepcion_6) ~ 1 #(esto ultimo le quita la columna de intercepto)
+
+objetoLCA_2<-poLCA(variables, df, nclass=2, nrep=50, maxiter=1000, graphs=T)
+objetoLCA_3<-poLCA(variables, df, nclass=3, nrep=50, maxiter=1000, graphs=T)
+objetoLCA_4<-poLCA(variables, df, nclass=4, nrep=50, maxiter=1000, graphs=T)
+objetoLCA_5<-poLCA(variables, df, nclass=5, nrep=50, maxiter=1000, graphs=T)
+objetoLCA_6<-poLCA(variables, df, nclass=6, nrep=50, maxiter=1000, graphs=T) #no converge!!!
+
+#3. Comparar ajuste de modelos usando AIC, BIC, SABIC, LMR-LRT, BLRT y Entropia
+#Dato que 6 clases no covnerge podemso ignorarlo y comparar de 2 a 5 clases
+#Modelo de 5 clases tiene un clase con solo 4%
+
+valor = c(objetoLCA_2$aic,objetoLCA_3$aic,objetoLCA_4$aic,objetoLCA_5$aic,
+          objetoLCA_2$bic,objetoLCA_3$bic,objetoLCA_4$bic, objetoLCA_5$bic)
+
+indice = c("aic", "aic", "aic","aic",
+           "bic", "bic", "bic", "bic")
+
+cantidad = c("2c", "3c", "4c", "5c",
+             "2c", "3c", "4c", "5c")
+
+n_clases = cbind.data.frame(cantidad,indice,valor)
+n_clases
+
+
+
+
+#4. Seleccionar modelo optimo considerando ajuste estadistico y interpretabilidad
+
+
+
+#5. Interpretar perfiles y asignar nombres
+
+
+
+#6. Validar perfiles usando variables externas (opcional)
 
