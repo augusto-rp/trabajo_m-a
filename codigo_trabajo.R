@@ -267,10 +267,15 @@ mvn(lpa_data)#no hay normalidad multivarida, asi que usar errores robustos
 
 variables<- cbind(percepcion_2, percepcion_3, percepcion_5, percepcion_6) ~ 1 #(esto ultimo le quita la columna de intercepto)
 
-objetoLCA_2<-poLCA(variables, df, nclass=2, nrep=50, maxiter=1000, graphs=T)
-objetoLCA_3<-poLCA(variables, df, nclass=3, nrep=50, maxiter=1000, graphs=T)
-objetoLCA_4<-poLCA(variables, df, nclass=4, nrep=50, maxiter=1000, graphs=T)
-objetoLCA_5<-poLCA(variables, df, nclass=5, nrep=50, maxiter=1000, graphs=T)
+
+#ATENCION, CORRER ESTE CODIGOS VA A RALENTIZAR MUCHO SU COMPUTADOR
+#PROCEDA CON CONSIDERACION A ESO
+
+set.seed(3141)
+objetoLCA_2<-poLCA(variables, df, nclass=2, nrep=500, maxiter=1000, graphs=T)
+objetoLCA_3<-poLCA(variables, df, nclass=3, nrep=500, maxiter=1000, graphs=T)
+objetoLCA_4<-poLCA(variables, df, nclass=4, nrep=500, maxiter=1000, graphs=T)
+objetoLCA_5<-poLCA(variables, df, nclass=5, nrep=500, maxiter=1000, graphs=T) #clase con menos de 5
 objetoLCA_6<-poLCA(variables, df, nclass=6, nrep=50, maxiter=1000, graphs=T) #no converge!!!
 
 #3. Comparar ajuste de modelos usando AIC, BIC, SABIC, LMR-LRT, BLRT y Entropia
@@ -287,18 +292,48 @@ cantidad = c("2c", "3c", "4c", "5c",
              "2c", "3c", "4c", "5c")
 
 n_clases = cbind.data.frame(cantidad,indice,valor)
-n_clases
+n_clases #bic castiga ams en muestras grandes
 
-
+#comparar ajuste modelos de 2 a 5 clases
 
 
 #4. Seleccionar modelo optimo considerando ajuste estadistico y interpretabilidad
-
+#cantidad indice    valor
+#1       2c    aic 11214.06
+#2       3c    aic 11138.78
+#3       4c    aic 11123.65
+#4       5c    aic 11122.60
+#5       2c    bic 11362.39
+#6       3c    bic 11363.83
+#7       4c    bic 11425.42
+#8       5c    bic 11501.09
 
 
 #5. Interpretar perfiles y asignar nombres
 
-
-
 #6. Validar perfiles usando variables externas (opcional)
+
+
+
+# Mismo analisis tratando datos como continuos -LPA -----------------------
+library(tidyLPA)
+library(mclust)
+library(robustbase)
+
+#lo calculare con error estandar y promedio robusto
+mr<-covMcd(lpa_data)
+mr$center #estimacion roubusta de vector promedio, mas apropiado que cov
+#ya que lpa usa promedios
+#The warning is telling you that a substantial portion of your data is 
+#concentrated on a single value for Variable 2 
+#(likely 0, or just one specific category code like '1' 
+#if the data wasn't centered). 
+#This violates the assumptions of the MCD estimator, 
+#which expects continuous data or at least enough variability to avoid 
+#perfect collinearity in the selected subset.
+
+#En resumen, no vale la pena hacerlo con supuesto de que datos son continuos
+
+
+set.seed(324)
 
