@@ -210,7 +210,7 @@ Las variables que estamos seleccionando son las siguientes:
   - Aprobación al gobierno: `eval_gob_1`
   - Percepción de progreso político de país: `percepcion_4`
 
-### Datos perdidos
+**3. Tratamiento de datos perdidos**
 
 Además debemos modificar la base de datos para que lea valores como NA:
 
@@ -236,7 +236,7 @@ Sin embargo, por un tema de conveniencia no se realizarán imputaciones, sino qu
 df <- na.omit(df)
 ```
 
-### Corrección de ítems invertidos
+**4. Inversion de items**
 
 Hay varios ítems donde el valor 1 indica una visión más "optimista" o de "mayor confianza", mientras que en otros pasa lo contrario. Para facilitar la interpretación se invertirán estos ítems.
 
@@ -279,5 +279,31 @@ df$eval_gob_1 <- ifelse(df$eval_gob_1 == 1, 3,    # Aprueba es 3
                               ifelse(df$eval_gob_1 == 3, 2, df$eval_gob_1)))  # Neutral es 2
 ```
 
+**5.¿Hace sentido considerar juntos los ítems de confiabilidad?**
+---
+
+**Consistencia interna de ítems
+
+```r
+confianza_items <- df[, c("confianza_6_d","confianza_6_i","confianza_6_k","confianza_6_o", "confianza_6_p")]
+alpha(confianza_items)
+```
+El valor nos indica una buena consistencia entre los ítems, por lo que se construirá una única variable que considere el promedio de todos los ítems `confianza_i`
+```r
+df$confianza_i <- rowMeans(confianza_items)
+```
+Además, esta si la invertiremos
+```r
+df$confianza_i <- 5- df$confianza_i
+```
+
+**6.Exploración de correlaciones entre variables**
+Este paso con fines exploratorios
+
+```r
+cor_matrix2 <- round(cor(df[, c("percepcion_2", "percepcion_3", "percepcion_4", "percepcion_5", "percepcion_6", "democracia_21", "confianza_i")], use="pairwise.complete.obs"), 2)
+print(cor_matrix2)
+```
+(Acá se puede encontrar un grafico de las correlaciones)[https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/correlaciones_variables.jpeg]
 
 </details>

@@ -193,7 +193,7 @@ df$confianza_i <- rowMeans(confianza_items)
 #RECORDAR QUE VALROES MAS ALTOS ES MAYOR DESCONFIANZA!
 #INVERTIR VALORES CONTINUOS DE CONFIANZA_1 antes de invertir promedio es 3.21
 
-df$confianza_i <- (4 + 1) - df$confianza_i #despues de invertir es 1.79
+df$confianza_i <- 5 - df$confianza_i #despues de invertir es 1.79
 
 
 
