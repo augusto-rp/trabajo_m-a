@@ -5,6 +5,7 @@ library(mice) #ver patron de datos perdidos
 library(ggplot2) #GRAFICOS
 library(psych) #algunos descriptivos
 library(corrplot) #graficos correlaciones
+library(dplyr) #pq es bacan tenerla abierta
 
 base<-read.csv("bd/base_93.csv", header=T)
 #Vamos a hacer una seleccion de las variables que nos interesan
@@ -112,6 +113,11 @@ describe(df)
 #democracia_21 mean 2.09
 #percepcion_4 2.81 como referencias
 
+
+# Correlacion entre variables de confianza --------------------------------
+
+
+
 #matriz de correlaciones entre variables de confianza
 cor_matrix <- round(cor(df[, c("confianza_6_d","confianza_6_i","confianza_6_k","confianza_6_o", "confianza_6_p")], use="pairwise.complete.obs"), 2)
 print(cor_matrix)
@@ -173,3 +179,21 @@ alpha(confianza_items)
 df$confianza_i <- rowMeans(confianza_items)
 
 #RECORDAR QUE VALROES MAS ALTOS ES MAYOR DESCONFIANZA!
+#INVERTIR VALORES CONTINUOS DE CONFIANZA_1 antes de invertir promedio es 3.21
+
+df$confianza_i <- (4 + 1) - df$confianza_i #despues de invertir es 1.79
+
+
+
+#CONSTRUIR MATRIZ DE CORRELACIONES ENTRE VARIABLES de percepciob, democracia_21 y confianza_i
+cor_matrix2 <- round(cor(df[, c("percepcion_2", "percepcion_3", "percepcion_4", "percepcion_5", "percepcion_6", "democracia_21", "confianza_i")], use="pairwise.complete.obs"), 2)
+print(cor_matrix2)
+#si aumenta democracia_21 disminuye valo
+
+#crear archivo cvs con df
+write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
+
+
+# ANALISIS DE PERFILES ----------------------------------------------------
+
+
