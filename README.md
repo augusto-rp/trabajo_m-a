@@ -280,7 +280,7 @@ df$eval_gob_1 <- ifelse(df$eval_gob_1 == 1, 3,    # Aprueba es 3
 ```
 
 **5.¿Hace sentido considerar juntos los ítems de confiabilidad?**
----
+
 
 **Consistencia interna de ítems
 
