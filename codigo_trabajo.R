@@ -349,19 +349,30 @@ objetoLCA_3
 
 
 
-
+objetoLCA_4
 #SOBRE MODELO DE 4 CLASES
-#CLASE 1 47.56% SOSTENIMIENTO
-#CLASE 2 16.67% OPTIMISTAS
-#CLASE 3 19.76% PESIMISTAS
-#CLASE 4 16.02% PAIS MAL, YO MEJOR , pero en este gusto la vision futura del pais se divide equitativametne
-        #clase 4  **parece** componerse de lo que en otro modelo seria optimistas y pesimistas
+#CLASE 1 16.67% OPTIMISTAS
+#CLASE 2 16.02% PAIS MAL, YO MEJOR , pero en este gusto la vision futura del pais se divide equitativametne
+#clase 2  **parece** componerse de lo que en otro modelo seria optimistas y pesimistas
+#CLASE 3 47.56% SOSTENIMIENTO
+#CLASE 4 19.76% PESIMISTAS
+
+#para ver fuerza de asociacion entre variables
+
+library(vcd)
+tabla_clase<- table(df$clase_3, df$clase_4)
+cramerv <- assocstats(tabla_clase)
+print(cramerv$cramer) #fuertisima asociacion de 0.89
+
+rm(list=c("cramerv", "tabla_clase"))
+
 
 #6. Validar perfiles usando variables externas (opcional)
 
 #Crear una columna en df con las clases a que pertenecede cada individuo
 df$clase_3 <- objetoLCA_3$predclass
 df$clase_4 <- objetoLCA_4$predclass
+
 
 
 #Caracterizacion de sexo  de clase_3 y 4
@@ -379,7 +390,8 @@ CrossTable(ct,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
 
 
 
-# REGRESIONES LINEALES ----------------------------------------------------
+# ANOVA ----------------------------------------------------
+#ojo que aca democracia_12 se toma como variable numerica, que en verdad no lo es
 df$clase_3<-as.factor(df$clase_3)
 df$clase_4<-as.factor(df$clase_4)
 
@@ -387,8 +399,63 @@ anova_3 <- aov(democracia_21 ~ clase_3, data = df)
 summary(anova_3) #vviendo las suma de cuadrado no explica nada
 
 ph_3 <- TukeyHSD(anova_3, "clase_3", conf.level = 0.95)
-print(ph_3) #diferencias son entre grupo 3 con el resto
+print(ph_3) #diferencias son entre grupo 3 -pesimistas con el resto
 
+anova_4 <- aov(democracia_21 ~ clase_4, data = df)
+summary(anova_4) #vviendo las suma de cuadrado no explica nada
+
+ph_4 <- TukeyHSD(anova_4, "clase_4", conf.level = 0.95)
+print(ph_4)
+#grupos 3(mantenimiento)y2(yo bien) son iguales y 4(pesimistas)y2(yo bien) son iguales
+
+#explican misma varianza, pero clase_3 lo hace con mas grados de libertad. 
+
+#Mantener ese modelo de 3 apra siguientes
+
+
+
+# REGRESION LOGISTICA -----------------------------------------------------
+#para regresion logistica primero hare una version simple y luego otro multinomial
+#en la sencilla los valores de democracia_21 seran dicotimizados, apoyar siempre democracia o no
+
+df <- df|>
+  mutate(
+    democracia_21_d = case_when(
+      democracia_21 == 1 ~ 1,  
+      democracia_21 == 2 ~ 1,  
+      democracia_21 == 3 ~ 2, 
+      TRUE ~ NA_integer_       # For any other value (e.g., 4, NA), assign NA
+    )
+  )
+#factorizarla
+df$democracia_21_d<-as.factor(df$democracia_21_d)
+str(df)
+
+#Modelo nulo
+rgl_null <- glm(democracia_21_d ~ 1, data = df, family = "binomial")   #aca el ~1 se pone siempre para crear modelo nulo
+summary(rgl_null)
+
+#Usando solo clase como predictor
+rgl_c <- glm(democracia_21_d ~ clase_3, data = df, family = "binomial")
+summary(rgl_c)
+#beta de clase 3 es significativa -0.89
+#en chance esto es que pertenecer a clase pesimista implica un chance de 0.41 de rechazar democracia comaprado con optimistas
+exp(-0.89)
+
+
+exp(-0.89)/(1+exp(-0.89))
+#pertenencia a clase negativos comaprado con optimistas aumenta un 29% probabilidad de rechazo a democracia
+
+
+
+
+
+
+
+
+################################
+######################################################
+################################
 ######################################################
 # Mismo analisis tratando datos como continuos -LPA -----------------------
 library(tidyLPA)
