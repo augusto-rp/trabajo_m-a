@@ -4,6 +4,7 @@ library(misty) #datos perdidos}
 library(mice) #ver patron de datos perdidos
 library(ggplot2) #GRAFICOS
 library(psych) #algunos descriptivos
+library(corrplot) #graficos correlaciones
 
 base<-read.csv("bd/base_93.csv", header=T)
 #Vamos a hacer una seleccion de las variables que nos interesan
@@ -110,3 +111,65 @@ df$eval_gob_1 <- ifelse(df$eval_gob_1 == 1, 3, #APRUEBA ES 3
 describe(df)
 #democracia_21 mean 2.09
 #percepcion_4 2.81 como referencias
+
+#matriz de correlaciones entre variables de confianza
+cor_matrix <- round(cor(df[, c("confianza_6_d","confianza_6_i","confianza_6_k","confianza_6_o", "confianza_6_p")], use="pairwise.complete.obs"), 2)
+print(cor_matrix)
+
+#d Tribunales, i gobierno, k congreso, o municipalidades, p fiscales
+
+#grafico de correlacioens
+#grafico de correlacioens
+color_breaks_full <- c(
+  # Lado Negativo
+  -1.00, -0.51, -0.41, -0.31, -0.21, -0.11,
+  # Cero
+  0.00, 
+  # Lado Positivo (Tus rangos deseados)
+  0.11, 0.21, 0.31, 0.41, 0.51, 1.00
+)
+custom_colors_full <- c(
+  # Colores para la correlación Negativa (Ejemplo: Usando tonos verdes como contraste)
+  "darkgreen",   # -1.00 a -0.51
+  "green4",      # -0.51 a -0.41
+  "yellowgreen", # -0.41 a -0.31
+  "cyan",        # -0.31 a -0.21
+  "darkcyan",    # -0.21 a -0.11
+  "lightgray",   # -0.11 a 0.00 
+  
+  # Colores para la correlación Positiva (Tus colores originales)
+  "lightgray",   # 0.00 a 0.11
+  "lightblue",   # 0.11 a 0.21
+  "blue",        # 0.21 a 0.31
+  "purple",      # 0.31 a 0.41
+  "red4",        # 0.41 a 0.51
+  "red"          # 0.51 a 1.00
+)
+
+corrplot(cor_matrix, 
+         method = "circle", 
+         type = "upper", 
+         tl.col = "black", 
+         tl.srt = 45,
+         title = "Matriz de Correlaciones entre Confianza en Instituciones",
+         mar = c(0,0,1,0),
+         
+         # --- Nuevos Parámetros de color ---
+         col = custom_colors_full,       # Paleta de colores extendida
+         cl.lim = c(-1, 1),              # Límite extendido para incluir el rango negativo
+         breaks = color_breaks_full      # Puntos de cambio de color extendidos
+)
+
+
+rm(list=c("color_breaks","custom_colors"))
+
+#Son correlaciones alta pero nada que haga pensar que no pueden ir juntas
+
+#alfa de cronbach de confianza
+confianza_items <- df[, c("confianza_6_d","confianza_6_i","confianza_6_k","confianza_6_o", "confianza_6_p")]
+alpha(confianza_items)
+
+#construir variable de confianza como promedio de las 5
+df$confianza_i <- rowMeans(confianza_items)
+
+#RECORDAR QUE VALROES MAS ALTOS ES MAYOR DESCONFIANZA!
