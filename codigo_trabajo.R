@@ -2,6 +2,7 @@
     ###Librerias
 library(misty) #datos perdidos}
 library(mice) #ver patron de datos perdidos
+library(ggplot2) #GRAFICOS
 
 base<-read.csv("bd/base_93.csv", header=T)
 #Vamos a hacer una seleccion de las variables que nos interesan
@@ -27,6 +28,28 @@ df[df == -8 | df == -9 | df ==88 | df==99] <- NA
 #Datos perdidos
 na.test(df) #difernecias son significativas por lo que datos perdidos no son aletaorios
 md.pattern(df, plot=T) #a la rapida pareciera que hay hartos datos perdisos en preguntas de confianza y creencia en democracia
+
+
+#quiero ver cantidad de NA para cada columna
+sapply(df, function(x) sum(is.na(x))) 
+#hacer un grafico con estos valores
+
+na_counts <- sapply(df, function(x) sum(is.na(x)))
+na_df <- data.frame(variable = names(na_counts), na_count = na_counts)
+ggplot(na_df, aes(x = reorder(variable, -na_count), y = na_count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(title = "Cantidad de datos perdidos por variable",
+       x = "Variable",
+       y = "Cantidad de datos perdidos") +
+  theme_minimal()
+
+rm(list=c("na_df","na_counts"))
+
+
+#podria realizar imputaciones pero creo que voy a elegir la opcion sencilla y eliminarlos.
+
+df <- na.omit(df) #sacar datos perdidos
 
 
 #Items a invertir (1 es positivo)
