@@ -154,120 +154,130 @@ Sepúlveda Rodríguez, I. (2021). Análisis de los Factores que influyen en las 
 # **Codigo y Pasos de Análisis**
 
 ---
+## Librerías a usar
 
+- `library(misty)` - Para análisis de datos perdidos
+- `library(mice)` - Para ver patrones de datos perdidos
+- `library(ggplot2)` - Para creación de gráficos
+- `library(psych)` - Para estadísticos descriptivos
+- `library(corrplot)` - Para gráficos de correlaciones
+- `library(dplyr)` - Para manipulación de datos
+- `library(poLCA)` - Para análisis de clases latentes
+- `library(gmodels)` - Para tablas de contingencia y chi-cuadrado
+- `library(stargazer)` - Para comparación de modelos de regresión
 
-## Librerias a usar
-* library(misty) datos perdidos
-* library(mice) ver patron de datos perdidos
-* library(ggplot2) GRAFICOS
-* library(psych) algunos descriptivos
-* library(corrplot) graficos correlaciones
-* library(dplyr) pq es bacan tenerla abierta
-* library(poLCA) clases latentes
-* library(gmodels) tabla de contingencias y chi cuadrado
-* library(stargazer) comparar log de regresiones
- 
- 
-## Preparacion de base de datos 
- 
+## Preparación de base de datos
+
 **1. Primero debemos cargar la base de datos**
-base<-read.csv("bd/base_93.csv",
-header=T)
-**2. y luego seleccionaremos la variables de interés**
+
 ```r
-df <- base[, c("id_bu", "sexo", "edad", "eval_gob_1", "percepcion_2", "percepcion_3", "percepcion_4", "percepcion_5", "percepcion_6", "democracia_21", "confianza_6_d", "confianza_6_i", "confianza_6_k", "confianza_6_o", "confianza_6_p")]
-  Las variables que estamos seleccionando son las siguientes
+base <- read.csv("bd/base_93.csv", header = TRUE)
 
-Variable dependiente: Apoyo a la democracia democracia_21
 
-Variables independientes:
+**2. Luego seleccionaremos las variables de interés**
 
-Relativas a Economía
+```r
+df <- base[, c("id_bu", "sexo", "edad", "eval_gob_1", "percepcion_2", 
+               "percepcion_3", "percepcion_4", "percepcion_5", "percepcion_6",
+               "democracia_21", "confianza_6_d", "confianza_6_i", "confianza_6_k",
+               "confianza_6_o", "confianza_6_p")]
+```
 
-Situación económica presente del país percepción_2
+Las variables que estamos seleccionando son las siguientes:
 
-Situación económica futura del país percepción_3
+- **Variable dependiente:**
+  - Apoyo a la democracia: `democracia_21`
 
-Situación económica personal presente percepción_5
+- **Variables independientes:**
+  - **Relativas a Economía:**
+    - Situación económica presente del país: `percepcion_2`
+    - Situación económica futura del país: `percepcion_3`
+    - Situación económica personal presente: `percepcion_5`
+    - Situación económica personal futura: `percepcion_6`
+  
+  - **Relativas a Confianza:**
+    - Confianza en tribunales: `confianza_6_d`
+    - Confianza en gobierno: `confianza_6_i`
+    - Confianza en congreso: `confianza_6_k`
+    - Confianza en municipalidades: `confianza_6_o`
+    - Confianza en fiscalía: `confianza_6_p`
 
-Situación económica personal futura percepción_6
+- **Variables de caracterización sociodemográfica:**
+  - Sexo: `sexo`
+  - Edad: `edad`
 
-Relativas a Confianza
+- **Otras variables para exploración:**
+  - Aprobación al gobierno: `eval_gob_1`
+  - Percepción de progreso político de país: `percepcion_4`
 
-Confianza en tribunales confianza_6_d
+### Datos perdidos
 
-Confianza en gobierno confianza_6_i
+Además debemos modificar la base de datos para que lea valores como NA:
 
-Confianza en congreso confianza_6_k
+```r
+df[df == -8 | df == -9 | df == 88 | df == 99] <- NA
+```
 
-Confianza en municipalidades confianza_6_o
+Usando el comando `na.test(df)` podemos observar que los datos perdidos no se pierden aleatoriamente. Es decir, hay algún patrón en los datos que se pierden.
 
-Confianza en fiscalía confianza_6_p
+```r
+sapply(df, function(x) sum(is.na(x)))
+```
 
-De caracterización sociodemográfica: sexo (sexo) y edad (edad)
+Muestra que la mayoría de datos perdidos están en preguntas de apoyo a la democracia y confianza a instituciones.
 
-Otras variables para exploración
+En la carpeta [gráficos e imágenes](https://github.com/augusto-rp/trabajo_m-a/tree/main/graficos%20e%20imagenes) se puede ver un gráfico que muestra la frecuencia de datos perdidos.
 
-Aprobación al gobierno (eval_gob_1)
+Sin embargo, por un tema de conveniencia no se realizarán imputaciones, sino que se eliminarán los 263 individuos que tienen al menos un dato perdido (17% de muestra total). 
 
-Percepción de progreso político de país (percepción_4)  
+**IMPORTANTE**: Esta no es una práctica recomendada.
 
-Datos perdidos
-Además debemos modificar la base de datos para que lea valores como NA
-
-R
-
-df[df == -8 | df == -9 | df ==88 | df==99] <- NA
-  Usando el comando
-
-R
-
-na.test(df) 
-podemos observar que los datos perdidos no se pierden aleatoriamente. Es decir, hay algun patrón en los datos que se pierden
-
-R
-
-sapply(df,
-function(x) sum(is.na(x)))
-muestra que mayoria de datos perdidos están en preguntas de apoyo a la democracia y confianza a instituciones. En la carpeta (gráficos e imágenes)[https://github.com/augusto-rp/trabajo_m-a/tree/main/graficos%20e%20imagenes] se puede ver una grafico que muestra la frecuencia de datos perdidos.   Sin embargo, por un tema de conveniencia no se realizarán imputaciones, sino que se eliminaran los 263 individuos que tienen al menos un dato perdido (17% de muestra total). IMPORTANTE esta no es práctica recomendada.
-
-R
-
+```r
 df <- na.omit(df)
-Corrección de ítems invertidos
-Hay varios ítems donde el valor 1 indica una visión más “optimista” o de “mayor confianza”, mientras que en otros pasa lo contrario. Para facilitar la interpretación se invertirán estos ítems No se invertirán ítems de confianza pues en este caso todos tienen el mismo ordenamiento  
+```
 
-Percepcion futuro económico del país
-R
+### Corrección de ítems invertidos
 
+Hay varios ítems donde el valor 1 indica una visión más "optimista" o de "mayor confianza", mientras que en otros pasa lo contrario. Para facilitar la interpretación se invertirán estos ítems.
+
+**No se invertirán ítems de confianza pues en este caso todos tienen el mismo ordenamiento.**
+
+**Percepción futuro económico del país:**
+```r
 df$percepcion_3 <- ifelse(df$percepcion_3 == 1, 3,
-                         ifelse(df$percepcion_3 == 2, 2,
-                                ifelse(df$percepcion_3 == 3, 1, df$percepcion_3)))
-Percepcion progreso del país
-R
+                         ifelse(df$percepcion_3 == 2, 2,
+                                ifelse(df$percepcion_3 == 3, 1, df$percepcion_3)))
+```
 
+**Percepción progreso del país:**
+```r
 df$percepcion_4 <- ifelse(df$percepcion_4 == 1, 3,
-                         ifelse(df$percepcion_4 == 2, 2,
-                                ifelse(df$percepcion_4 == 3, 1, df$percepcion_4)))
-Percepcion futuro economico PERSONAL
-R
+                         ifelse(df$percepcion_4 == 2, 2,
+                                ifelse(df$percepcion_4 == 3, 1, df$percepcion_4)))
+```
 
+**Percepción futuro económico personal:**
+```r
 df$percepcion_6 <- ifelse(df$percepcion_6 == 1, 5,
-                         ifelse(df$percepcion_6 == 2, 4,
-                                ifelse(df$percepcion_6 == 3, 3,
-                                       ifelse(df$percepcion_6 == 4, 2,
-                                              ifelse(df$percepcion_6 == 5, 1, df$percepcion_6)))))
-APOYO A DEMOCRACIA
-R
+                         ifelse(df$percepcion_6 == 2, 4,
+                                ifelse(df$percepcion_6 == 3, 3,
+                                       ifelse(df$percepcion_6 == 4, 2,
+                                              ifelse(df$percepcion_6 == 5, 1, df$percepcion_6)))))
+```
 
+**Apoyo a democracia:**
+```r
 df$democracia_21 <- ifelse(df$democracia_21 == 1, 3,
-                         ifelse(df$democracia_21 == 2, 2,
-                                ifelse(df$democracia_21 == 3, 1, df$democracia_21)))
-Aprobación a gobierno
-R
+                          ifelse(df$democracia_21 == 2, 2,
+                                 ifelse(df$democracia_21 == 3, 1, df$democracia_21)))
+```
 
-df$eval_gob_1 <- ifelse(df$eval_gob_1 == 1, 3, #APRUEBA ES 3
-                       ifelse(df$eval_gob_1 == 2, 1, #DESAPRUEBA ES 1
-                              ifelse(df$eval_gob_1 == 3, 2, df$eval_gob_1))) #NO APRUEB
+**Aprobación a gobierno:**
+```r
+df$eval_gob_1 <- ifelse(df$eval_gob_1 == 1, 3,    # Aprueba es 3
+                       ifelse(df$eval_gob_1 == 2, 1,    # Desaprueba es 1
+                              ifelse(df$eval_gob_1 == 3, 2, df$eval_gob_1)))  # Neutral es 2
+```
+
 
 </details>
