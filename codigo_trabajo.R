@@ -458,7 +458,7 @@ exp(-0.83113)/(1+exp(-0.83113))
 rgl_c_c <- glm(democracia_21_d ~ clase_3+confianza_i, data = df, family = "binomial")
 summary(rgl_c_c)
 
-anova(rgl_null, rgl_c, rgl_c_c, modelo) #cada modelo es significativamente mejor que anterior
+anova(rgl_null, rgl_c, rgl_c_c) #cada modelo es significativamente mejor que anterior
 
 
 
@@ -466,6 +466,11 @@ anova(rgl_null, rgl_c, rgl_c_c, modelo) #cada modelo es significativamente mejor
 # -VALE LA PENA HACER CLASES? -----------------------------
 modelo<-glm(democracia_21_d~percepcion_2+percepcion_3+percepcion_5+percepcion_6, data=df, family="binomial")
 summary(modelo) #si vale la pena?
+
+modelo_c_c<-glm(democracia_21_d~percepcion_2+percepcion_3+percepcion_5+percepcion_6+confianza_i, data=df, family="binomial")
+summary(modelo_c_c)
+
+anova(rgl_null, modelo, modelo_c_c) #viendo residuales modelo_c_c es el mejor
 
 ################################
 ######################################################
