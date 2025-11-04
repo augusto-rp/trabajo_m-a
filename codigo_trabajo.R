@@ -9,6 +9,8 @@ library(dplyr) #pq es bacan tenerla abierta
 library(MVN) #normalidad multivariada para LPA
 library(poLCA) #clases latentes
 library(gmodels) #tabla de contingencias y chi cuadrado
+library(stargazer)#comparar log de regresiones
+
 
 base<-read.csv("bd/base_93.csv", header=T)
 #Vamos a hacer una seleccion de las variables que nos interesan
@@ -62,6 +64,7 @@ describe(df)
 #democracia_21 mean 1.91
 #percepcion_4 2.19 como referencias
 
+#efectivamente estan invertidos ya hice la comprobacion con % que aparecen en presentacion
 
 #Items a invertir (1 es positivo)
   #percepcion_3: 1 mejroara, 2 no cambiara, 3 empeorara
@@ -242,14 +245,13 @@ corrplot(cor_matrix2,
 
 rm(list=c("color_breaks_full","custom_colors_full"))
 
-#crear archivo cvs con df
-write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
+
 
 
 # ANALISIS DE CLASES ----------------------------------------------------
 
 str(df)
-    #la verdad es que por caracteristicas de escalas usaria LCA con variables categoricas
+    #para lca variables deben ser numericas
 df$percepcion_2<-as.numeric(df$percepcion_2)
 df$percepcion_3<-as.numeric(df$percepcion_3)
 df$percepcion_5<-as.numeric(df$percepcion_5)
@@ -355,7 +357,16 @@ objetoLCA_4
 #CLASE 2 16.02% PAIS MAL, YO MEJOR , pero en este gusto la vision futura del pais se divide equitativametne
 #clase 2  **parece** componerse de lo que en otro modelo seria optimistas y pesimistas
 #CLASE 3 47.56% SOSTENIMIENTO
-#CLASE 4 19.76% PESIMISTAS
+#CLASE 4 19.76% PESIMISTAS}
+
+
+#Crear una columna en df con las clases a que pertenecede cada individuo
+df$clase_3 <- objetoLCA_3$predclass
+df$clase_4 <- objetoLCA_4$predclass
+
+
+#crear archivo cvs con df y asignacion de clases
+write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
 
 #para ver fuerza de asociacion entre variables
 
@@ -368,10 +379,6 @@ rm(list=c("cramerv", "tabla_clase"))
 
 
 #6. Validar perfiles usando variables externas (opcional)
-
-#Crear una columna en df con las clases a que pertenecede cada individuo
-df$clase_3 <- objetoLCA_3$predclass
-df$clase_4 <- objetoLCA_4$predclass
 
 
 
@@ -388,12 +395,13 @@ CrossTable(ct,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
 
 #en ambos grupos dsitribucion es igual a esperada
 
-
+#factorizar clases
+df$clase_3<-as.factor(df$clase_3)
+df$clase_4<-as.factor(df$clase_4)
 
 # ANOVA ----------------------------------------------------
 #ojo que aca democracia_12 se toma como variable numerica, que en verdad no lo es
-df$clase_3<-as.factor(df$clase_3)
-df$clase_4<-as.factor(df$clase_4)
+
 
 anova_3 <- aov(democracia_21 ~ clase_3, data = df)
 summary(anova_3) #vviendo las suma de cuadrado no explica nada
@@ -438,20 +446,26 @@ summary(rgl_null)
 #Usando solo clase como predictor
 rgl_c <- glm(democracia_21_d ~ clase_3, data = df, family = "binomial")
 summary(rgl_c)
-#beta de clase 3 es significativa -0.89
+#beta de clase 3 es significativa -0.89 
 #en chance esto es que pertenecer a clase pesimista implica un chance de 0.41 de rechazar democracia comaprado con optimistas
-exp(-0.89)
+1-exp(-0.89) #pesimsitas tienen un chance 0.58 menor de apoyar la democracia
+
+#este formula no incluye intercepto, al calcular probabilidad debo usar full odd, no parcial
+0.05982+-0.89095
+exp(-0.83113)/(1+exp(-0.83113))
+#pertenencia a clase negativos aumenta un 30.34 probabilidad de rechazo a democracia
+
+rgl_c_c <- glm(democracia_21_d ~ clase_3+confianza_i, data = df, family = "binomial")
+summary(rgl_c_c)
+
+anova(rgl_null, rgl_c, rgl_c_c, modelo) #cada modelo es significativamente mejor que anterior
 
 
-exp(-0.89)/(1+exp(-0.89))
-#pertenencia a clase negativos comaprado con optimistas aumenta un 29% probabilidad de rechazo a democracia
 
 
-
-
-
-
-
+# -VALE LA PENA HACER CLASES? -----------------------------
+modelo<-glm(democracia_21_d~percepcion_2+percepcion_3+percepcion_5+percepcion_6, data=df, family="binomial")
+summary(modelo) #si vale la pena?
 
 ################################
 ######################################################
