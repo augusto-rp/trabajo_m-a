@@ -472,6 +472,23 @@ summary(modelo_c_c)
 
 anova(rgl_null, modelo, modelo_c_c) #viendo residuales modelo_c_c es el mejor
 
+
+
+
+
+
+
+# Relacion confianza y dllo economico -------------------------------------
+
+#Analizar la relación entre confianza institucional (confianza_i) y percepción de desarrollo económico del país (clases y percepcion_4)
+
+
+
+
+
+
+
+
 ################################
 ######################################################
 ################################
