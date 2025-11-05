@@ -305,6 +305,6 @@ Este paso con fines exploratorios
 cor_matrix2 <- round(cor(df[, c("percepcion_2", "percepcion_3", "percepcion_4", "percepcion_5", "percepcion_6", "democracia_21", "confianza_i")], use="pairwise.complete.obs"), 2)
 print(cor_matrix2)
 ```
-(Acá se puede encontrar un grafico de las correlaciones)[https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/correlaciones_variables.jpeg]
+[Acá se puede encontrar un grafico de las correlaciones](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/correlaciones_variables.jpeg)
 
 </details>
