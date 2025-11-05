@@ -79,11 +79,11 @@ Surge la necesidad de explorar posibles **discrepancias evaluativas** en la pobl
 
 ## 🎯 Objetivo 2
 
-### Identificación de Perfiles Latentes
+### Identificación de Clases Latentes
 **Identificar distintos patrones de evaluación de la situación económica personal y del país, y su asociación con el apoyo a la democracia**
 
 #### Metodología Propuesta
-- **Análisis de perfiles latentes** para descubrir patrones subyacentes
+- **Análisis de clases latentes** para descubrir patrones subyacentes con datos ordinales
 - **Caracterización de grupos** según sus percepciones económicas
 - **Evaluación comparativa** del apoyo democrático entre perfiles
 
@@ -103,7 +103,8 @@ Se trabajará con datos de la encuesta CEP (2025) más recientes (Marzo-Abril, 2
 ### Percepción económica
 - Percepción de situación económica presente del país
 - Percepción de situación económica futura del país  
-- Percepción de situación económica propia
+- Percepción de situación económica presente propia
+- - Percepción de situación económica futura propia
 
 ### Percepción de progreso
 - Percepción de progreso del país
@@ -149,7 +150,7 @@ Sepúlveda Rodríguez, I. (2021). Análisis de los Factores que influyen en las 
 
 
 <details>
-<summary>PREPARACION BASE DE DATOS/summary>
+<summary>PREPARACION BASE DE DATOS</summary>
   
 # **Preparacion de base de datos**
 
@@ -316,8 +317,9 @@ write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
 
 </details>
 
+
 <details>
-<summary>PLAN DE ANALISIS LCA/summary>
+<summary>PLAN DE ANALISIS LCA</summary>
 
 
 # **Plan de análisis**
