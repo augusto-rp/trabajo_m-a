@@ -282,7 +282,7 @@ df$eval_gob_1 <- ifelse(df$eval_gob_1 == 1, 3,    # Aprueba es 3
 **5.¿Hace sentido considerar juntos los ítems de confiabilidad?**
 
 
-**Consistencia interna de ítems
+**Consistencia interna de ítems**
 
 ```r
 confianza_items <- df[, c("confianza_6_d","confianza_6_i","confianza_6_k","confianza_6_o", "confianza_6_p")]
@@ -298,6 +298,7 @@ df$confianza_i <- 5- df$confianza_i
 ```
 
 **6.Exploración de correlaciones entre variables**
+
 Este paso con fines exploratorios
 
 ```r
