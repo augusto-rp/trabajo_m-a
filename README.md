@@ -88,7 +88,7 @@ Surge la necesidad de explorar posibles **discrepancias evaluativas** en la pobl
 - **Evaluación comparativa** del apoyo democrático entre perfiles
 
 # Datos para utilizar y variables de interés
-Se trabajará con datos de la encuesta CEP (2025) más recientes (Marzo-Abril, 2025), disponibles en https://www.cepchile.cl/encuesta/encuesta-cep-n-93-marzo-abril-2025/.
+Se trabajará con datos de la encuesta CEP (2025) más recientes (Marzo-Abril, 2025), disponibles [aqui](https://www.cepchile.cl/encuesta/encuesta-cep-n-93-marzo-abril-2025/).
 
 # Variables de Interés
 
