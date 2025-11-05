@@ -153,7 +153,7 @@ Sepúlveda Rodríguez, I. (2021). Análisis de los Factores que influyen en las 
   
 # **Preparacion de base de datos**
 
----
+
 ## Librerías a usar
 
 - `library(misty)` - Para análisis de datos perdidos
