@@ -149,9 +149,9 @@ Sepúlveda Rodríguez, I. (2021). Análisis de los Factores que influyen en las 
 
 
 <details>
-<summary>CODIGO Y PASOS DE ANALISIS</summary>
+<summary>PREPARACION BASE DE DATOS/summary>
   
-# **Codigo y Pasos de Análisis**
+# **Preparacion de base de datos**
 
 ---
 ## Librerías a usar
@@ -306,5 +306,118 @@ cor_matrix2 <- round(cor(df[, c("percepcion_2", "percepcion_3", "percepcion_4", 
 print(cor_matrix2)
 ```
 [Acá se puede encontrar un grafico de las correlaciones](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/correlaciones_variables.jpeg)
+
+
+**7.Crear base de datos nueva con estos cambios**
+
+```r
+write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
+```
+
+</details>
+
+<details>
+<summary>PLAN DE ANALISIS LCA/summary>
+
+
+# **Plan de análisis**
+
+**1.Pasos de preparacion para analisis**
+
+Debido a que las escalas con que se miden las variables de percepcion económica son ordinales realziar un LPA (Análisis de eprfiles latentes) no es lo más adecuado.
+Es ahi donde un Análisis de CLases Latentes resultado más útil. SIn emabrgo en df hay que asegurarnos que estas variables esten debidamente catalogadas
+
+
+```r
+df$percepcion_2<-as.numeric(df$percepcion_2)
+df$percepcion_3<-as.numeric(df$percepcion_3)
+df$percepcion_5<-as.numeric(df$percepcion_5)
+df$percepcion_6<-as.numeric(df$percepcion_6)
+df$sexo<-as.factor(df$sexo) -aprovechamos de factorizar que no lo habiamos hechp
+```
+
+Hacer un string de las variables de interes: percepcion_2, percepcion_3, percepcion_5, percepcion_6
+
+```r
+variables<- cbind(percepcion_2, percepcion_3, percepcion_5, percepcion_6) ~ 1
+```
+
+**2.Estimacion de modelo con distintos numeros de clases**
+
+💀 ## **ATENCION, CORRER ESTE CODIGOS VA A RALENTIZAR MUCHO SU COMPUTADOR** 💀
+
+Recomiendo cambiar el numero de repeticiones a 50 o 10.
+
+```r
+set.seed(3141)
+objetoLCA_2<-poLCA(variables, df, nclass=2, nrep=500, maxiter=1000, graphs=T)
+set.seed(3141)
+objetoLCA_3<-poLCA(variables, df, nclass=3, nrep=500, maxiter=1000, graphs=T)
+set.seed(3141)
+objetoLCA_4<-poLCA(variables, df, nclass=4, nrep=500, maxiter=1000, graphs=T)
+set.seed(3141)
+objetoLCA_5<-poLCA(variables, df, nclass=5, nrep=500, maxiter=1000, graphs=T)
+#Hay una clase con menos de 5% por lo que no es recomendable este modelo
+set.seed(3141)
+objetoLCA_6<-poLCA(variables, df, nclass=6, nrep=500, maxiter=1000, graphs=T)
+#no converge!!!
+```
+
+**3.Comparacion de BIC y AIC**
+
+El BIC es el criterio de información más útil para comparar modelos ya que privilegia más modelos más parsimoniosos.
+Para construir una tabla de comparacion de los valores entre distintos modelos usamos el siguietne comando
+
+```r
+valor = c(objetoLCA_2$aic,objetoLCA_3$aic,objetoLCA_4$aic,objetoLCA_5$aic,
+          objetoLCA_2$bic,objetoLCA_3$bic,objetoLCA_4$bic, objetoLCA_5$bic)
+
+indice = c("aic", "aic", "aic","aic",
+           "bic", "bic", "bic", "bic")
+
+cantidad = c("2c", "3c", "4c", "5c",
+             "2c", "3c", "4c", "5c")
+
+n_clases = cbind.data.frame(cantidad,indice,valor)
+n_clases
+```
+
+###La entropia también es un valor importante, que nos dice que tn distintas son las clases entre si
+
+```r
+poLCA.entropy(objetoLCA_3) 
+poLCA.entropy(objetoLCA_4)
+#Valores no estandarizados, entre más altos mejor.
+```
+
+**4.Interpretar modelos**
+
+Si bien lo anterior es un paso importante también es relevante ver la interpretabilidad de los distintos modelos
+¿Hace sentido las clases que genera? ¿Que información nos aporta? ¿Que ganamos al agregar o reducir una clase para caracterizar la población?
+
+Si vemos el output de los modelos que son candidatos para nuestra seleccion podemos ver cuál es la proporcion esperada de individuos en cada clase que entregue determianda respuesta
+
+```r
+objetoLCA_(N)
+```
+
+En base a eso podemos ver como en una clase más del 75% de los individuos tienden a votar en una dirección u otra. 
+
+**5.Crear variable de clasificacion en df **
+
+Una vez que hemos seleccionado nuestro modelo creamos una columna en la base de datos que clasifica cada individuo en la clase donde es más probable que pertenezca
+
+```r
+df$clase_n <- objetoLCA_n$predclass
+df$clase_n<-as.factor(df$clase_n)
+#Aprovechemos de factorizar al tiro!
+```
+
+
+Y ahora sobreescribimos la base de datos limpia que creamos en la seccion anterior
+
+```r
+write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
+```
 
 </details>
