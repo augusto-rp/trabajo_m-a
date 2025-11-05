@@ -319,15 +319,25 @@ write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
 
 
 <details>
-<summary>PLAN DE ANALISIS LCA</summary>
+<summary>PLAN DE ANALISIS </summary>
 
 
 # **Plan de análisis**
 
-**1.Pasos de preparacion para analisis**
 
-Debido a que las escalas con que se miden las variables de percepcion económica son ordinales realziar un LPA (Análisis de eprfiles latentes) no es lo más adecuado.
-Es ahi donde un Análisis de CLases Latentes resultado más útil. SIn emabrgo en df hay que asegurarnos que estas variables esten debidamente catalogadas
+**1.Relación entre confianza y situacion del país**
+Recordemos nuestro primer objetivo
+¿Existe realmente a nivel de la ciudadanía una asociación significativa entre confiana institucional y dllo económico?
+
+Para llevar a cabo este objetivo ya tenemos una primera idea en base en la matriz de correlaciones anterior donde se observaba que la confianza institucional correlacionada postivamente con todas las variables de percepcion económica.
+**Inicialmente sí, confianza en insituciones y percepció de progreso económico suelen ir juntas**
+
+
+
+**2.Pasos de preparacion para analisis LCA**
+
+Debido a que las escalas con que se miden las variables de percepcion económica son ordinales realizar un LPA (Análisis de perfiles latentes) no es lo más adecuado.
+Es ahi donde un Análisis de Clases Latentes resultado más útil. SIn emabrgo en df hay que asegurarnos que estas variables esten debidamente catalogadas
 
 
 ```r
@@ -344,7 +354,7 @@ Hacer un string de las variables de interes: percepcion_2, percepcion_3, percepc
 variables<- cbind(percepcion_2, percepcion_3, percepcion_5, percepcion_6) ~ 1
 ```
 
-**2.Estimacion de modelo con distintos numeros de clases**
+**3.Estimacion de modelo con distintos numeros de clases**
 
 💀 ## **ATENCION, CORRER ESTE CODIGOS VA A RALENTIZAR MUCHO SU COMPUTADOR** 💀
 
@@ -365,7 +375,7 @@ objetoLCA_6<-poLCA(variables, df, nclass=6, nrep=500, maxiter=1000, graphs=T)
 #no converge!!!
 ```
 
-**3.Comparacion de BIC y AIC**
+**4.Comparacion de BIC y AIC**
 
 El BIC es el criterio de información más útil para comparar modelos ya que privilegia más modelos más parsimoniosos.
 Para construir una tabla de comparacion de los valores entre distintos modelos usamos el siguietne comando
@@ -392,7 +402,7 @@ poLCA.entropy(objetoLCA_4)
 #Valores no estandarizados, entre más altos mejor.
 ```
 
-**4.Interpretar modelos**
+**5.Interpretar modelos**
 
 Si bien lo anterior es un paso importante también es relevante ver la interpretabilidad de los distintos modelos
 ¿Hace sentido las clases que genera? ¿Que información nos aporta? ¿Que ganamos al agregar o reducir una clase para caracterizar la población?
@@ -405,7 +415,7 @@ objetoLCA_(N)
 
 En base a eso podemos ver como en una clase más del 75% de los individuos tienden a votar en una dirección u otra. 
 
-**5.Crear variable de clasificacion en df **
+**6.Crear variable de clasificacion en df**
 
 Una vez que hemos seleccionado nuestro modelo creamos una columna en la base de datos que clasifica cada individuo en la clase donde es más probable que pertenezca
 
@@ -421,5 +431,56 @@ Y ahora sobreescribimos la base de datos limpia que creamos en la seccion anteri
 ```r
 write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
 ```
+
+**7.Regresion Logistica**
+
+Vamos a hacer algo **polemico** vamos a binarizar el apoyo a la democracia.
+Es decir vamos a unir las respuestas 
+En algunas circunstancias un gobierno autoritario puede ser preferible a la democracia y
+No importa si es democracia o autoritario mientras el gobierno haga lo correcto
+en una sola. Y vamos a comparar a entender el apoyo a la democracia como mejor forma de gobierno como una creencia que no admite matices
+
+```r
+df <- df|>
+  mutate(
+    democracia_21_d = case_when(
+      democracia_21 == 1 ~ 1,  
+      democracia_21 == 2 ~ 1,  
+      democracia_21 == 3 ~ 2, 
+      TRUE ~ NA_integer_       # For any other value (e.g., 4, NA), assign NA
+    )
+  )
+df$democracia_21_d<-as.factor(df$democracia_21_d)
+#y la factorizamos
+```
+
+Para realizar la regesion logistica binomial primero hace un modelo nulo que nos sirva de comparacion y luego construimos los siguientes modelos agregando predictores
+
+```r
+rgl_null <- glm(democracia_21_d ~ 1, data = df, family = "binomial")   
+summary(rgl_null)
+#Usando solo clase como predictor
+rgl_c <- glm(democracia_21_d ~ clase_N, data = df, family = "binomial")
+summary(rgl_c)
+#Agregando confianza institucional como predictor
+rgl_c_c <- glm(democracia_21_d ~ clase_N+confianza_i, data = df, family = "binomial")
+summary(rgl_c_c)
+#Y comparamos los residuales entre modelos
+anova(rgl_null, rgl_c, rgl_c_c)
+#Y vemos que cada modelo es mejor que el anterior
+```
+
+**PERO** ¿Ganamos algo al hacer clases? Despúes al hacer eso asumimos independencia condicional.
+Es decir, que dentro de cada clase hay una distribución homogenea entre las 4 variables que usamos para construirlas.
+Además puede ser que ¡No todas esas variables sean significativas en la prediccion de apoyo a la democracia!
+**Esto se indagará más en entrega final**
+
+
+
+
+
+
+
+
 
 </details>
