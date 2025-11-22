@@ -326,18 +326,20 @@ write.csv(df, "bd_limpia/base_93_limpia.csv", row.names = FALSE)
 
 
 **1.Relación entre confianza y situacion del país**
+
 Recordemos nuestro primer objetivo
 ¿Existe realmente a nivel de la ciudadanía una asociación significativa entre confiana institucional y dllo económico?
 
 Para llevar a cabo este objetivo ya tenemos una primera idea en base en la matriz de correlaciones anterior donde se observaba que la confianza institucional correlacionada postivamente con todas las variables de percepcion económica.
-**Inicialmente sí, confianza en insituciones y percepció de progreso económico suelen ir juntas**
+
+**Inicialmente sí, confianza en insituciones y percepción de progreso económico van juntas**
 
 
 
 **2.Pasos de preparacion para analisis LCA**
 
 Debido a que las escalas con que se miden las variables de percepcion económica son ordinales realizar un LPA (Análisis de perfiles latentes) no es lo más adecuado.
-Es ahi donde un Análisis de Clases Latentes resultado más útil. SIn emabrgo en df hay que asegurarnos que estas variables esten debidamente catalogadas
+Es ahi donde un Análisis de Clases Latentes resultado más útil. SIn embargo en df hay que asegurarnos que estas variables esten debidamente catalogadas
 
 
 ```r
@@ -394,7 +396,7 @@ n_clases = cbind.data.frame(cantidad,indice,valor)
 n_clases
 ```
 
-###La entropia también es un valor importante, que nos dice que tn distintas son las clases entre si
+### La entropia también es un valor importante, que nos dice que tn distintas son las clases entre si
 
 ```r
 poLCA.entropy(objetoLCA_3) 
@@ -447,11 +449,11 @@ df <- df|>
       democracia_21 == 1 ~ 1,  
       democracia_21 == 2 ~ 1,  
       democracia_21 == 3 ~ 2, 
-      TRUE ~ NA_integer_       # For any other value (e.g., 4, NA), assign NA
+      TRUE ~ NA_integer_     
     )
   )
+  #y la factorizamos
 df$democracia_21_d<-as.factor(df$democracia_21_d)
-#y la factorizamos
 ```
 
 Para realizar la regesion logistica binomial primero hace un modelo nulo que nos sirva de comparacion y luego construimos los siguientes modelos agregando predictores
@@ -470,8 +472,9 @@ anova(rgl_null, rgl_c, rgl_c_c)
 #Y vemos que cada modelo es mejor que el anterior
 ```
 
-**PERO** ¿Ganamos algo al hacer clases? Despúes al hacer eso asumimos independencia condicional.
+**PERO** ¿Ganamos algo al hacer clases?  Al hacer eso asumimos independencia condicional.
 Es decir, que dentro de cada clase hay una distribución homogenea entre las 4 variables que usamos para construirlas.
+
 Además puede ser que ¡No todas esas variables sean significativas en la prediccion de apoyo a la democracia!
 **Esto se indagará más en entrega final**
 
@@ -479,6 +482,29 @@ Además puede ser que ¡No todas esas variables sean significativas en la predic
 
 
 
+
+
+
+</details>
+
+
+
+
+<details>
+<summary>REPORTE RESULTADOS</summary>
+
+# Reporte Resultados
+
+
+Retomemos entonces nuestros objetivos, y veámos que hemos descubierto
+
+Nuestro *primer objetivo* era identificar si existe realmente a nivel de la ciudadanía una asociación significativa entre desarrollo económico y legimitidad de las instituciones.
+Para evaluar esto primero creamos un único item que promedia el nivel de confianza en 5 instituciones distintas (congreso, gobierno, municipalidades, tribunales y fiscalia).
+Estos cinco items mostraron una alta consistencia interna entre sí, por lo que se justifica realizar este agregado.
+Se observó un alta correlación de este item con todos los indicadores de desarrollo económico.
+
+En la tabla a continuación se pueden observar las correlaciones
+### Dado que los rangos de respuesta son estrechas y ordinales, se eligio ahcer una correlacion de spearman que trata los valores de forma ordinal.
 
 
 

@@ -195,11 +195,13 @@ df$confianza_i <- rowMeans(confianza_items)
 
 df$confianza_i <- 5 - df$confianza_i #despues de invertir es 1.79
 
-
+str(df)
 
 #CONSTRUIR MATRIZ DE CORRELACIONES ENTRE VARIABLES de percepciob, democracia_21 y confianza_i
 cor_matrix2 <- round(cor(df[, c("percepcion_2", "percepcion_3", "percepcion_4", "percepcion_5", "percepcion_6", "democracia_21", "confianza_i")], use="pairwise.complete.obs"), 2)
 print(cor_matrix2)
+
+
 
 
 
