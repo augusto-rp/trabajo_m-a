@@ -506,16 +506,26 @@ Se observó un alta correlación de este item con todos los indicadores de desar
 En la tabla a continuación se pueden observar las correlaciones.
 Dado que los rangos de respuesta son estrechas y ordinales, se eligio hacer una correlacion de spearman que trata los valores de forma ordinal.
 
-Tabla 1. Correlaciones entre indicadores de percepción económica y confianza institucional
+### **Tabla 1.** Correlaciones entre indicadores de percepción económica y confianza institucional
+
 | Variable | 1 | 2 | 3 | 4 | 5 | 6 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-|**1)	Percepción situación económico presente del país**|1|| | | | |
+|**1)	Percepción situación económico presente del país**|1| | | | | |
 |**2)	Percepción situación económica futura del país**|0.33|1| | | | |
 |**3)	Percepción progreso del país**|0.44|0.35|1| | | |
 |**4)	Percepción situación económico personal presente**|0.25|0.14|.20|1| | |
 |**5)	Percepción situación económico personal futura**|0.17|0.25|0.17|0.18|1| |
 |**6)	Confianza en instituciones**|0.32|0.25|0.30|0.18|0.20|1|
 
+Por lo tanto ⭐**una primera conclusión** ⭐es
+
+
+## Existe una correlación positiva entre la confianza instituciones y variables de percepción de crecimiento económico.
+Personas con mayores niveles de eprcepcion de progreso económico tanto a nivel país como a nivel personal también tienen mayores niveles de confianza institucional
+
+Sin embargo, ### ESTO ES SOLO A NIVEL CORRELACIONAL
+No nos dice nada a nivel de ¿que causa este efecto? ¿hay alguna direccionalidad entre estas variables?
+Además de acuerdo a Lipset (1959) cabría esperar que estas dos variables a su vez estén asociadas a mayores niveles de apoyo a la democracia.
 
 
 </details>
