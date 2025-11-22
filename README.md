@@ -498,14 +498,23 @@ Además puede ser que ¡No todas esas variables sean significativas en la predic
 
 Retomemos entonces nuestros objetivos, y veámos que hemos descubierto
 
-Nuestro *primer objetivo* era identificar si existe realmente a nivel de la ciudadanía una asociación significativa entre desarrollo económico y legimitidad de las instituciones.
+Nuestro **primer objetivo** era identificar si existe realmente a nivel de la ciudadanía una asociación significativa entre desarrollo económico y legimitidad de las instituciones.
 Para evaluar esto primero creamos un único item que promedia el nivel de confianza en 5 instituciones distintas (congreso, gobierno, municipalidades, tribunales y fiscalia).
 Estos cinco items mostraron una alta consistencia interna entre sí, por lo que se justifica realizar este agregado.
 Se observó un alta correlación de este item con todos los indicadores de desarrollo económico.
 
-En la tabla a continuación se pueden observar las correlaciones
-### Dado que los rangos de respuesta son estrechas y ordinales, se eligio ahcer una correlacion de spearman que trata los valores de forma ordinal.
+En la tabla a continuación se pueden observar las correlaciones.
+Dado que los rangos de respuesta son estrechas y ordinales, se eligio hacer una correlacion de spearman que trata los valores de forma ordinal.
 
+Tabla 1. Correlaciones entre indicadores de percepción económica y confianza institucional
+| Variable | 1 | 2 | 3 | 4 | 5 | 6 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+|**1)	Percepción situación económico presente del país**|1|| | | | |
+|**2)	Percepción situación económica futura del país**|0.33|1| | | | |
+|**3)	Percepción progreso del país**|0.44|0.35|1| | | |
+|**4)	Percepción situación económico personal presente**|0.25|0.14|.20|1| | |
+|**5)	Percepción situación económico personal futura**|0.17|0.25|0.17|0.18|1| |
+|**6)	Confianza en instituciones**|0.32|0.25|0.30|0.18|0.20|1|
 
 
 
