@@ -533,7 +533,7 @@ Con esto en mente pasamos a nuestro segundo objetivo que se divide en dos partes
 
 Dividiremos el **Segundo Objetivo** en varias partes
 
-- ## **Identificación de clases latentes**
+- ## **1 Identificación de clases latentes**
  
  Nuestro primer objetivo es explorar distintos patrones de evaluación de la situació económica personal y del país.
  Para ello se realizó un análisis de clases latentes (LCA) usando las variables d epercepción económica presente y futura del país y personales.
@@ -552,15 +552,53 @@ Son personas que actualmente ven la situación económica del áis y personal en
 y que no creen que vaya a cambiar.
 
 - CLASE 3 26.26% -PESIMISTAS
+
 Son personas que ven la situación económica del áis y personal por debajo del promedio,
 y que creen que tanto el país o su situación se mantendrá o empeorara.
 
 
  ### Modelo de 4 clases
 
+- CLASE 1 16.67% OPTIMISTAS
 
+Similar a caso anterior
 
+- CLASE 2 16.02% PAIS MAL, YO MEJOR 
 
+Esta es la únia clase nueva en comparación al modelo anterior, y parece componerse de una mezcla de lo que en el modelo anterior serían optimistas y pesimistas
+Son personas que si bien tienen una visión negativa de la situación país, muestran optimismo respecto a su sitación económica futura y evaluan su situaciona actual en el promedio o ligeramente sobre el promedio.
+En esta clase sin emabrgo, la visión del futuro económico del país se divide equitativamente. Esto quiere decir que un tercio de las persoans ene sta clase cree que empeorara, otro tercio que se mantendra, y otro tercio que mejorará.
+
+- CLASE 3 47.56% SOSTENIMIENTO
+
+Similar a caso anterior
+
+- CLASE 4 19.76% PESIMISTAS
+
+Similar a caso anterior
+
+Teóricamente resulta interesante la aparición de esta nueva clase en el modelo de 4 clases, sin embargo, los indicadores de comapración de ajuste al modelo sugieron que es más paropiado seleccionar el modelo de 3 clases.
+
+| Modelo | Indice | Valor 
+| :---: | :---: | :---: | 
+|3 clases| AIC | 11138.78 |
+|4 clases| AIC | 11123.65 |
+|3 clases| BIC | 11363.83 |
+|4 clases| BIC | 114258.42 |
+|3 clases| ENTROPIA | 4.499 |
+|3 clases| ENTROPIA | 4.480 |
+
+El indicador BIC es el criterio más útil a privilegiar la parsimonia, además la entropía nos da un indicador de que tan distintas son las clases.
+Entre más alto el valor es más apropiado
+
+### **Conclusion** : La población se divide en 3 clases de acuerdo a la percepción económica.
+
+Casi la mitad de la población (49.27%) tiene una percepción de la situación económica personal y del país "ni buena ni mala" o mala, y no esperan que esto vaya a cambiar
+La otra mitad se divide casi equitativemente entre un grupo que representa al  24.47% que tienee optimismo de que tanto su situación como la del país mejorara, además de tener en su mayoria una percepcion actual "ni buena ni mala" de su econompía y la del país.
+Y un tercer grupo (26,26%) que ve la situación actual como mala y que cree en su mayoria que esta se deteriorará.
+
+Hay evidencia que sugiere que hay un cuarto grupo que se compone de personas que tiene una mejor percepcion de si situacion económica que la del pais, y que además se muestran más optimismtas respecto a su futuro.
+Sin embargo, los datos muestran que considerar este cuarto grupo no mejora la caracterizacion de la muestra analizada.
 
 - ## **Regresiones logística**
 

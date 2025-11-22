@@ -292,14 +292,14 @@ objetoLCA_6<-poLCA(variables, df, nclass=6, nrep=50, maxiter=1000, graphs=T) #no
 #Dato que 6 clases no covnerge podemso ignorarlo y comparar de 2 a 5 clases
 #Modelo de 5 clases tiene un clase con solo 4%
 
-valor = c(objetoLCA_2$aic,objetoLCA_3$aic,objetoLCA_4$aic,objetoLCA_5$aic,
-          objetoLCA_2$bic,objetoLCA_3$bic,objetoLCA_4$bic, objetoLCA_5$bic)
+valor = c(objetoLCA_3$aic,objetoLCA_4$aic,
+          objetoLCA_3$bic,objetoLCA_4$bic)
 
-indice = c("aic", "aic", "aic","aic",
-           "bic", "bic", "bic", "bic")
+indice = c("aic", "aic", 
+           "bic", "bic")
 
-cantidad = c("2c", "3c", "4c", "5c",
-             "2c", "3c", "4c", "5c")
+cantidad = c("3c", "4c", 
+             "3c", "4c")
 
 n_clases = cbind.data.frame(cantidad,indice,valor)
 n_clases #bic castiga ams en muestras grandes
