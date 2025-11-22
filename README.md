@@ -517,15 +517,54 @@ Dado que los rangos de respuesta son estrechas y ordinales, se eligio hacer una 
 |**5)	Percepción situación económico personal futura**|0.17|0.25|0.17|0.18|1| |
 |**6)	Confianza en instituciones**|0.32|0.25|0.30|0.18|0.20|1|
 
-Por lo tanto ⭐**una primera conclusión** ⭐es
+Por lo tanto una ⭐  PRIMERA CONCLUSION ES 
 
 
 ## Existe una correlación positiva entre la confianza instituciones y variables de percepción de crecimiento económico.
 Personas con mayores niveles de eprcepcion de progreso económico tanto a nivel país como a nivel personal también tienen mayores niveles de confianza institucional
 
-Sin embargo, ### ESTO ES SOLO A NIVEL CORRELACIONAL
+Sin embargo, 
+**ESTO ES SOLO A NIVEL CORRELACIONAL**
+
 No nos dice nada a nivel de ¿que causa este efecto? ¿hay alguna direccionalidad entre estas variables?
 Además de acuerdo a Lipset (1959) cabría esperar que estas dos variables a su vez estén asociadas a mayores niveles de apoyo a la democracia.
+Recordemos que Alister Sanhueza et al (20215) en un estudio de varios países mostró que en democracias libres como la chilena, factores coyunturales la situación económica del país y personal no tienen impacto significativo sobre el nivel de apoyo a la democracia 
+Con esto en mente pasamos a nuestro segundo objetivo que se divide en dos partes
+
+Dividiremos el **Segundo Objetivo** en varias partes
+
+- ## **Identificación de clases latentes**
+ 
+ Nuestro primer objetivo es explorar distintos patrones de evaluación de la situació económica personal y del país.
+ Para ello se realizó un análisis de clases latentes (LCA) usando las variables d epercepción económica presente y futura del país y personales.
+ Los modelos que fueron mejores candidatos son los modelos de 3 y 4 clases.
+ 
+ ### Modelo de 3 clases
+ 
+- CLASE 1 24.47% -OPTIMISTA A FUTURO
+
+Son personas que no necesariamente ven su situacion económica actual ni la del país como buena, 
+pero que creen muestrna niveles de optimismo a futuro.
+
+- CLASE 2 49.27% -SOSTENIMIENTO
+
+Son personas que actualmente ven la situación económica del áis y personal en el promedio o ligeramente mala,
+y que no creen que vaya a cambiar.
+
+- CLASE 3 26.26% -PESIMISTAS
+Son personas que ven la situación económica del áis y personal por debajo del promedio,
+y que creen que tanto el país o su situación se mantendrá o empeorara.
+
+
+ ### Modelo de 4 clases
+
+
+
+
+
+- ## **Regresiones logística**
+
+
 
 
 </details>
