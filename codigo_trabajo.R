@@ -10,6 +10,7 @@ library(MVN) #normalidad multivariada para LPA
 library(poLCA) #clases latentes
 library(gmodels) #tabla de contingencias y chi cuadrado
 library(stargazer)#comparar log de regresiones
+library(chisq.posthoc.test)#comparacion chi cuadrado
 
 
 base<-read.csv("bd/base_93.csv", header=T)
@@ -425,10 +426,11 @@ table(df$edad_grupo, df$clase_3)
 ct_edad<-xtabs(~edad_grupo + clase_3, data=df)
 CrossTable(ct_edad,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
 
-#quiero hacer test para evaluar donde hay diferencias en la dsitribucion esperada 
 
+#test pos hoc para hacer comparaciones multiples
 
-
+posthoc_results <- chisq.posthoc.test(ct_edad, method = "holm")
+print(posthoc_results)
 
 
 # ANOVA -------------NO HACER ESTO---------------------------------------

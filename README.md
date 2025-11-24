@@ -166,6 +166,7 @@ Sepúlveda Rodríguez, I. (2021). Análisis de los Factores que influyen en las 
 - `library(poLCA)` - Para análisis de clases latentes
 - `library(gmodels)` - Para tablas de contingencia y chi-cuadrado
 - `library(stargazer)` - Para comparación de modelos de regresión
+- `library(chisq.posthoc.test)` - comparacion chi cuadrado
 
 ## Preparación de base de datos
 
@@ -584,7 +585,7 @@ Teóricamente resulta interesante la aparición de esta nueva clase en el modelo
 |3 clases| AIC | 11138.78 |
 |4 clases| AIC | 11123.65 |
 |3 clases| BIC | 11363.83 |
-|4 clases| BIC | 114258.42 |
+|4 clases| BIC | 11425.42 |
 |3 clases| ENTROPIA | 4.499 |
 |4 clases| ENTROPIA | 4.480 |
 
@@ -608,16 +609,31 @@ Aca vamos a ver la distribucion de edad y sexo por grupo. No consideraremos NSE 
 
 ![Grafico que muestra % de mujeres y hombres en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/procentaje_sexo_clase.jpg)
 
+Analisis de chi cuadrado muestran que la distribucion clases entre sexo no difiere significativamente a lo esperado (X2=3.64, df=2, p=0.161)
+
 
 -**Segun grupo etario**
 
 ![Grafico que muestra % de personas de cada grupo etaria en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/procentaje_edad_clase.jpg)
 
+Analisis de chi cuadrado muestran que la distribucion de clases dentro de los grupos etarios difiere significativamente  a lo esperado (X2=36.488, df=8, p<0.001)
+Se realizaron analisis post hoc con correcion de Holm para determinar los casos donde hay diferencias significativas. Estos muestran que
+
+- Las personas de 18-29 tienen un mayor numero de optimistas y menor numero de pesimistas que lo esperado.
+- Las personas mayores a 65 años tienen un mayor numero de pesimistas que lo esperado.
+- Para el resgo de grupos la distribucion se adecua a lo esperado.
+
+
 
 - ## **Regresiones logística**
 
-Nuestra proxima tarea es evaluar el poder predictivo de apoyo a la democracia de estas clases
+Nuestra proxima tarea es evaluar el poder predictivo de apoyo a la democracia de estas clases.
+El apoyo a la democracia fue binarizado en dos categorias. La primera implica apoyo a la demoracia bajo cualquier circusntancia.
+Las opciones "En algunas circunstancias un gobierno autoritario puede ser preferible a la democracia" Y "No importa si es democracia o autoritario mientras el gobierno haga lo correcto" se agruparon en una sola categoria pues en ambos casos hay una realtivizacion del apoyo a la democracia.
 
+Para ello se realiazon tres regresiones lineales. 
+
+El primer modelo -nulo- usa solo el promedio como predictor, el segundo usa la clase como predictor y el tercero clase y confianza institucional.
 
 
 </details>
