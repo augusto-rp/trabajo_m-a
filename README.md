@@ -635,7 +635,7 @@ Para ello se realiazon tres regresiones lineales.
 
 El primer modelo -nulo- usa solo el promedio como predictor, el segundo usa la clase como predictor y el tercero clase y confianza institucional.
 
-Los resultados se presenta en la siguiente tabla
+Los resultados se presenta en la siguiente tabla:
 
 
 
@@ -643,10 +643,26 @@ El segundo modelo muestra que la probabilidad que las chance de que alguien pesi
 En terminos de probabilida esto implica que una persona pesimsita tiene una probabilidad de 30.34% de de apoyar la democracia en constante con una probabilidad de 51.5% por parte de las personas optimistas.
 
 Al introducir la confianza institucional como predictora, la pertenencia a la clase pesimista sigue implicando un chance de 0.1198 de apoyar a la democracia comparado con la chande ed 0.2084 de alguien optimista con los mismos niveles de confianza institucional. Es así como las personas optimistas tienen una chance 1.73 veces mayor que los pesimistas en apoyar la democracia al controlar por confianza institucional.
-En terminos de probabilida esto implica que una persona pesimsita tiene una probabilidad de 10.70% de apoyar la democracia en contraste al 17.25% de apoyo a la democracia para optimistas. 
+En terminos de probabilida esto implica que una persona pesimista tiene una probabilidad de 10.70% de apoyar la democracia en contraste al 17.25% de apoyo a la democracia para optimistas. 
+
+Finalmente, por cada punto de aumento en la confianza institucional hay un aumento 2.26 en las odds de apoyar la democracia manteniendo la clase de percepcione conómica constante.
+
+
+## Sin embargo ¡las clases esconden un secreto! 👀
+
+Si realizamos una regresion lineal separando cada uno de las variables que evaluan percepcin económica como predictores, nos damos cuenta que solo las relativas a la percepcipción económica **del país** tienen significancia.
 
 
 
 
-El segundo modelo muestra que la probabilidad de que una persona pesimsita 
+¡Este hecho queda oculto al crear las clases! Al agrupar las variables de percepcion económica personal con las anteriores se pierde información, y hace parecer que estas 4 variables son relevantes. Cuando en realidad no lo son.
+
+
+
+Por lo tanto algo importante a concluir de todo este esfuerzo es
+
+# [No complicarse innecesariamente](https://www.youtube.com/watch?v=ygr5AHufBN4&list=RDygr5AHufBN4&start_radio=1)
+
+
+
 </details>

@@ -485,8 +485,9 @@ summary(rgl_c)
 exp(0.05982+-0.89085)#0.4356 es oddRatio de apoyar democracia vs no apoyar democracia
 exp(0.05982) #1.06 es oddRatio de apoyar democracia vs no apoyar democracia
 
+1.06/0.4345 #2.43
 
--1.567956+-0.553340
+
 
 exp(0.05982+-0.89085)/(1+exp(0.05982+-0.89085))
 exp(0.05982)/(1+exp(0.05982))
@@ -494,19 +495,14 @@ exp(0.05982)/(1+exp(0.05982))
 rgl_c_c <- glm(democracia_21_d ~ clase_3+confianza_i, data = df, family = "binomial")
 summary(rgl_c_c)
 
-exp(-1.567956+-0.553340) #0.1198 es oddRatio de apoyar democracia vs no apoyar democracia
-exp(-1.567956) #0.2084709 es oddRatio de apoyar democracia vs no apoyar democracia
+exp(-1.567956+-0.553340) #0.1198 es oddRatio de apoyar democracia vs no apoyar democracia pesimsitas
+exp(-1.567956) #0.2084709 es oddRatio de apoyar democracia vs no apoyar democracia optimistas
 
-#es decir para mismos niveles de confianza en instituciones ser optimista da menos odds de apoyar democracia que pesimista
+0.2084/0.1198
 
-0.2084/0.575026
+exp(-1.567956+-0.553340)/(1+exp(-1.567956+-0.553340)) #probabilidad de apoyo a democracia 10.7
 
-(1-0.553340)*100 #44.66 menos chance de apoyo a democracia
-
-
-exp(-1.567956+-0.553340)/(1+exp(-1.567956+-0.553340))
-
-exp(-1.567956)/(1-exp(-1.567956))
+exp(-1.567956)/(1+exp(-1.567956)) #17.25 optimistas
 
 stargazer(rgl_null, rgl_c, rgl_c_c, type="text", align =T) #cada modelo es significativamente mejor que anterior
 anova(rgl_null, rgl_c, rgl_c_c) 
