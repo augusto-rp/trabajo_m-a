@@ -492,7 +492,7 @@ Además puede ser que ¡No todas esas variables sean significativas en la predic
 
 
 <details>
-<summary>REPORTE RESULTADOS</summary>
+<summary>REPORTE RESULTADOS v. extendida</summary>
 
 # Reporte Resultados- version extendida
 
@@ -706,7 +706,7 @@ Por lo tanto algo importante a concluir de todo este esfuerzo es
 
 
 <details>
-<summary>REPORTE RESULTADOS</summary>
+<summary>REPORTE RESULTADOS v.abrevida</summary>
 
 # Reporte Resultados- version abrevida
 
