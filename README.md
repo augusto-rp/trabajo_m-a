@@ -652,7 +652,7 @@ Los resultados se presenta en la siguiente tabla:
 | Pseudo R2 N | 0 | | 0.04 | | 0.09 | |
 | AIC | 1690.7 | | 1658.6 | | 1615.2 | |
 | | | | | | | |
-| *Nota: ***p > 0.001* | | | | | | |
+| *Nota: \*\*\*p > 0.001 | | | | | | |
 
 
 El segundo modelo muestra que la probabilidad que las chance de que alguien pesimista apoye la democracia es de 0.43, mientras que la de alguien optimsita es 1.06. Es asi como las personas en la clase optimistas tiene 2.44 más chances de apoyar la democracia que alguien pesimista.
