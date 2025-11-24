@@ -537,10 +537,11 @@ summary(modelo) #si vale la pena?
 modelo_c_c<-glm(democracia_21_d~percepcion_2+percepcion_3+percepcion_5+percepcion_6+confianza_i, data=df, family="binomial")
 summary(modelo_c_c)
 
-anova(rgl_null, modelo, modelo_c_c) #viendo residuales modelo_c_c es el mejor
+anova(modelo, modelo_c_c) #viendo residuales modelo_c_c es el mejor
+pseudo_r2(modelo)
+pseudo_r2(modelo_c_c)
 
-
-
+stargazer(modelo, modelo_c_c, type="text", align =T,digits = 4)
 
 
 

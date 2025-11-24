@@ -494,7 +494,7 @@ Además puede ser que ¡No todas esas variables sean significativas en la predic
 <details>
 <summary>REPORTE RESULTADOS</summary>
 
-# Reporte Resultados
+# Reporte Resultados- version extendida
 
 
 Retomemos entonces nuestros objetivos, y veámos que hemos descubierto
@@ -649,7 +649,7 @@ Los resultados se presenta en la siguiente tabla:
 | | | | | | | |
 | **Estadísticos del Modelo** | | | | | | |
 | Deviance Mo | 1688.7 | | 1652.6*** | | 1607.2*** | |
-| Pseudo R2 N | 0 | | 0.04 | | 0.09 | |
+| Pseudo R2 Nagelkerke | 0 | | 0.04 | | 0.09 | |
 | AIC | 1690.7 | | 1658.6 | | 1615.2 | |
 | | | | | | | |
 | *Nota: \*\*\*p > 0.001 | | | | | | |
@@ -664,12 +664,33 @@ En terminos de probabilidad esto implica que una persona pesimista tiene una pro
 Finalmente, por cada punto de aumento en la confianza institucional hay un aumento 2.26 en las odds de apoyar la democracia manteniendo la clase de percepcione conómica constante.
 
 
+### ⭐  **Conclusion** : La  pertenencia a la clase de pesimistas es un predictor significativo de reducción en el apoyo a la democracia, incluso al controlar por confianzaz en las instituciones.
+Además la confianza institucional es en sí misma un predictor significativo de apoyo a la democracia.
+
+
+
 ## Sin embargo ¡las clases esconden un secreto! 👀
 
-Si realizamos una regresion lineal separando cada uno de las variables que evaluan percepcin económica como predictores, nos damos cuenta que solo las relativas a la percepcipción económica **del país** tienen significancia.
+Si realizamos una regresion logística separando cada uno de las variables que evaluan percepcin económica como predictores, nos damos cuenta que solo las relativas a la percepcipción económica **del país** tienen significancia.
 
+### Resultados de Modelos de Regresión Logística
 
-
+| | **Clase** | | **Clase+Confianza** | |
+| :--- | :---: | :---: | :---: | :---: |
+| **Variable** | **B (ES)** | **ODD** | **B (ES)** | **ODD** |
+| Intercepto | | | | |
+| P. Presente País | 0.329 (0.07)*** | 1.39 | 0.2431 (0.07)*** | 1.28 |
+| P. Futura País | 0.358 (0.09)*** | 1.43 | 0.2896 (0.1)*** | 1.34 |
+| P. Presente Personal | 0.112 (0.08) | | 0.0758 (0.08) | |
+| P. Futura País | -0.053 (0.08) | | -0.1149 (0.08) | |
+| Confianza Institucional | | | 0.7483 (0.13)*** | 2.11 |
+| | | | | |
+| **Estadísticos del Modelo** | | | | |
+| Deviance Modelo | 1628 | | 1592*** | |
+| Pseudo R2 Nagalkerke | 0.06 | | 0.10 | |
+| AIC | 1638.2 | | 1604.4 | |
+| | | | | |
+| *Nota: \*\*\*p > 0.001* | | | | |
 
 ¡Este hecho queda oculto al crear las clases! Al agrupar las variables de percepcion económica personal con las anteriores se pierde información, y hace parecer que estas 4 variables son relevantes. Cuando en realidad no lo son.
 
@@ -679,6 +700,15 @@ Por lo tanto algo importante a concluir de todo este esfuerzo es
 
 # [No complicarse innecesariamente](https://www.youtube.com/watch?v=ygr5AHufBN4&list=RDygr5AHufBN4&start_radio=1)
 
+
+
+</details>
+
+
+<details>
+<summary>REPORTE RESULTADOS</summary>
+
+# Reporte Resultados- version abrevida
 
 
 </details>
