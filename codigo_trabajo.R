@@ -482,18 +482,34 @@ rgl_c <- glm(democracia_21_d ~ clase_3, data = df, family = "binomial")
 summary(rgl_c)
 #beta de clase 3 es significativa -0.89 
 #en chance esto es que pertenecer a clase pesimista implica un chance de 0.41 de rechazar democracia comaprado con optimistas
-1-exp(-0.89) #pesimsitas tienen un chance 0.58 menor de apoyar la democracia
+exp(0.05982+-0.89085)#0.4356 es oddRatio de apoyar democracia vs no apoyar democracia
+exp(0.05982) #1.06 es oddRatio de apoyar democracia vs no apoyar democracia
 
-#este formula no incluye intercepto, al calcular probabilidad debo usar full odd, no parcial
-0.05982+-0.89095
-exp(-0.83113)/(1+exp(-0.83113))
-#pertenencia a clase negativos aumenta un 30.34 probabilidad de rechazo a democracia
+
+-1.567956+-0.553340
+
+exp(0.05982+-0.89085)/(1+exp(0.05982+-0.89085))
+exp(0.05982)/(1+exp(0.05982))
 
 rgl_c_c <- glm(democracia_21_d ~ clase_3+confianza_i, data = df, family = "binomial")
 summary(rgl_c_c)
 
-anova(rgl_null, rgl_c, rgl_c_c) #cada modelo es significativamente mejor que anterior
+exp(-1.567956+-0.553340) #0.1198 es oddRatio de apoyar democracia vs no apoyar democracia
+exp(-1.567956) #0.2084709 es oddRatio de apoyar democracia vs no apoyar democracia
 
+#es decir para mismos niveles de confianza en instituciones ser optimista da menos odds de apoyar democracia que pesimista
+
+0.2084/0.575026
+
+(1-0.553340)*100 #44.66 menos chance de apoyo a democracia
+
+
+exp(-1.567956+-0.553340)/(1+exp(-1.567956+-0.553340))
+
+exp(-1.567956)/(1-exp(-1.567956))
+
+stargazer(rgl_null, rgl_c, rgl_c_c, type="text", align =T) #cada modelo es significativamente mejor que anterior
+anova(rgl_null, rgl_c, rgl_c_c) 
 
 
 

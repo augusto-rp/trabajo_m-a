@@ -612,7 +612,7 @@ Aca vamos a ver la distribucion de edad y sexo por grupo. No consideraremos NSE 
 Analisis de chi cuadrado muestran que la distribucion clases entre sexo no difiere significativamente a lo esperado (X2=3.64, df=2, p=0.161)
 
 
--**Segun grupo etario**
+-**Segun grupo etario en procentaje**
 
 ![Grafico que muestra % de personas de cada grupo etaria en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/procentaje_edad_clase.jpg)
 
@@ -635,5 +635,18 @@ Para ello se realiazon tres regresiones lineales.
 
 El primer modelo -nulo- usa solo el promedio como predictor, el segundo usa la clase como predictor y el tercero clase y confianza institucional.
 
+Los resultados se presenta en la siguiente tabla
 
+
+
+El segundo modelo muestra que la probabilidad que las chance de que alguien pesimista apoye la democracia es de 0.43, mientras que la de alguien optimsita es 1.06. Es asi como las personas en la clase optimistas tiene 2.44 más chances de apoyar la democracia que alguien pesimista.
+En terminos de probabilida esto implica que una persona pesimsita tiene una probabilidad de 30.34% de de apoyar la democracia en constante con una probabilidad de 51.5% por parte de las personas optimistas.
+
+Al introducir la confianza institucional como predictora, la pertenencia a la clase pesimista sigue implicando un chance de 0.1198 de apoyar a la democracia comparado con la chande ed 0.2084 de alguien optimista con los mismos niveles de confianza institucional. Es así como las personas optimistas tienen una chance 1.73 veces mayor que los pesimistas en apoyar la democracia al controlar por confianza institucional.
+En terminos de probabilida esto implica que una persona pesimsita tiene una probabilidad de 10.70% de apoyar la democracia en contraste al 17.25% de apoyo a la democracia para optimistas. 
+
+
+
+
+El segundo modelo muestra que la probabilidad de que una persona pesimsita 
 </details>
