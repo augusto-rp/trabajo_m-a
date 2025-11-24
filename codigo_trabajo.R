@@ -402,7 +402,36 @@ CrossTable(ct,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
 df$clase_3<-as.factor(df$clase_3)
 df$clase_4<-as.factor(df$clase_4)
 
-# ANOVA ----------------------------------------------------
+
+describe(df)
+
+
+#generar agrupaciones segun variable edad, un grupo de 18 a 30, otro de 31 a 40, otro de 41 a 50 otro de 51 a 60 y otro de 60+
+df <- df |>
+  mutate(
+    edad_grupo = case_when(
+      edad >= 18 & edad <= 30 ~ "18-30",
+      edad >= 31 & edad <= 40 ~ "31-40",
+      edad >= 41 & edad <= 50 ~ "41-50",
+      edad >= 51 & edad <= 60 ~ "51-60",
+      edad > 60 ~ "60+",
+      TRUE ~ NA_character_  # For any other value, assign NA
+    )
+  )
+
+table(df$edad_grupo, df$clase_3)
+
+#usar chi cuadrado para ver distribucion de clases segun edad
+ct_edad<-xtabs(~edad_grupo + clase_3, data=df)
+CrossTable(ct_edad,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
+
+#quiero hacer test para evaluar donde hay diferencias en la dsitribucion esperada 
+
+
+
+
+
+# ANOVA -------------NO HACER ESTO---------------------------------------
 #ojo que aca democracia_12 se toma como variable numerica, que en verdad no lo es
 
 

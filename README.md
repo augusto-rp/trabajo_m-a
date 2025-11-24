@@ -577,7 +577,7 @@ Similar a caso anterior
 
 Similar a caso anterior
 
-Teóricamente resulta interesante la aparición de esta nueva clase en el modelo de 4 clases, sin embargo, los indicadores de comapración de ajuste al modelo sugieron que es más paropiado seleccionar el modelo de 3 clases.
+Teóricamente resulta interesante la aparición de esta nueva clase en el modelo de 4 clases, sin embargo, los indicadores de comparación de ajuste al modelo sugieron que es más apropiado seleccionar el modelo de 3 clases.
 
 | Modelo | Indice | Valor 
 | :---: | :---: | :---: | 
@@ -586,12 +586,12 @@ Teóricamente resulta interesante la aparición de esta nueva clase en el modelo
 |3 clases| BIC | 11363.83 |
 |4 clases| BIC | 114258.42 |
 |3 clases| ENTROPIA | 4.499 |
-|3 clases| ENTROPIA | 4.480 |
+|4 clases| ENTROPIA | 4.480 |
 
 El indicador BIC es el criterio más útil a privilegiar la parsimonia, además la entropía nos da un indicador de que tan distintas son las clases.
 Entre más alto el valor es más apropiado
 
-### **Conclusion** : La población se divide en 3 clases de acuerdo a la percepción económica.
+### ⭐  **Conclusion** : La población se divide en 3 clases de acuerdo a la percepción económica.
 
 Casi la mitad de la población (49.27%) tiene una percepción de la situación económica personal y del país "ni buena ni mala" o mala, y no esperan que esto vaya a cambiar
 La otra mitad se divide casi equitativemente entre un grupo que representa al  24.47% que tienee optimismo de que tanto su situación como la del país mejorara, además de tener en su mayoria una percepcion actual "ni buena ni mala" de su econompía y la del país.
@@ -600,8 +600,23 @@ Y un tercer grupo (26,26%) que ve la situación actual como mala y que cree en s
 Hay evidencia que sugiere que hay un cuarto grupo que se compone de personas que tiene una mejor percepcion de si situacion económica que la del pais, y que además se muestran más optimismtas respecto a su futuro.
 Sin embargo, los datos muestran que considerar este cuarto grupo no mejora la caracterizacion de la muestra analizada.
 
+### ¿Cómo son los grupos?
+
+Aca vamos a ver la distribucion de edad y sexo por grupo. No consideraremos NSE que seria una varaible muy interesante, pero tiene muy pocos casos de los segmentos mas bajos
+
+- **Segun sexo**
+
+![Grafico que muestra % de mujeres y hombres en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/porcentaje_sexo_clase.jpg)
+
+
+-**Segun grupo etario**
+
+![Grafico que muestra % de personas de cada grupo etaria en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/porcentaje_edad_clase.jpg)
+
+
 - ## **Regresiones logística**
 
+Nuestra proxima tarea es evaluar el poder predictivo de apoyo a la democracia de estas clases
 
 
 
