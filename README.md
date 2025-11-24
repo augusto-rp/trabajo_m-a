@@ -639,8 +639,8 @@ Los resultados se presenta en la siguiente tabla:
 
 ### Resultados de Modelos de Regresión Logística
 
-| | **Modelo Nulo** | | **Clase** | | **Clase+Confianza** |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| | **Modelo Nulo** | | **Clase** | | **Clase+Confianza** | |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Variable** | **B (ES)** | **ODD** | **B (ES)** | **ODD** | **B (ES)** | **ODD** |
 | Intercepto | -0.2319*** (0.05) | 0.793 | 0.0598 (0.12) | -1.06 | -1.5680 (0.27) | 0.208 |
 | Clase 2 | | | -0.1391 (0.14) | 0.924 | 0.004 (0.15) | 0.209 |
@@ -655,11 +655,11 @@ Los resultados se presenta en la siguiente tabla:
 | *Nota: \*\*\*p > 0.001 | | | | | | |
 
 
-El segundo modelo muestra que la probabilidad que las chance de que alguien pesimista apoye la democracia es de 0.43, mientras que la de alguien optimsita es 1.06. Es asi como las personas en la clase optimistas tiene 2.44 más chances de apoyar la democracia que alguien pesimista.
-En terminos de probabilida esto implica que una persona pesimsita tiene una probabilidad de 30.34% de de apoyar la democracia en constante con una probabilidad de 51.5% por parte de las personas optimistas.
+El segundo modelo muestra que  las chance de que alguien pesimista apoye la democracia es de 0.43, mientras que la de alguien optimsita es 1.06. Es asi como las personas en la clase optimistas tiene 2.44 más chances de apoyar la democracia que alguien pesimista.
+En terminos de probabilidad esto implica que una persona pesimista tiene una probabilidad de 30.34% de de apoyar la democracia en constante con una probabilidad de 51.5% por parte de las personas optimistas.
 
 Al introducir la confianza institucional como predictora, la pertenencia a la clase pesimista sigue implicando un chance de 0.1198 de apoyar a la democracia comparado con la chance de 0.2084 de alguien optimista con los mismos niveles de confianza institucional. Es así como las personas optimistas tienen una chance 1.73 veces mayor que los pesimistas en apoyar la democracia al controlar por confianza institucional.
-En terminos de probabilida esto implica que una persona pesimista tiene una probabilidad de 10.70% de apoyar la democracia en contraste al 17.25% de apoyo a la democracia para optimistas. 
+En terminos de probabilidad esto implica que una persona pesimista tiene una probabilidad de 10.70% de apoyar la democracia en contraste al 17.25% de apoyo a la democracia para optimistas. 
 
 Finalmente, por cada punto de aumento en la confianza institucional hay un aumento 2.26 en las odds de apoyar la democracia manteniendo la clase de percepcione conómica constante.
 
