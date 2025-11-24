@@ -487,7 +487,7 @@ exp(0.05982) #1.06 es oddRatio de apoyar democracia vs no apoyar democracia
 
 1.06/0.4345 #2.43
 
-
+exp(-0.2319)
 
 exp(0.05982+-0.89085)/(1+exp(0.05982+-0.89085))
 exp(0.05982)/(1+exp(0.05982))
@@ -504,8 +504,29 @@ exp(-1.567956+-0.553340)/(1+exp(-1.567956+-0.553340)) #probabilidad de apoyo a d
 
 exp(-1.567956)/(1+exp(-1.567956)) #17.25 optimistas
 
-stargazer(rgl_null, rgl_c, rgl_c_c, type="text", align =T) #cada modelo es significativamente mejor que anterior
+stargazer(rgl_null, rgl_c, rgl_c_c, type="text", align =T,digits = 4) #cada modelo es significativamente mejor que anterior
 anova(rgl_null, rgl_c, rgl_c_c) 
+
+
+#pseudo R2 defino funcion
+
+pseudo_r2<-function(LogModel){
+  dev<-LogModel$deviance
+  nullDev<-LogModel$null.deviance
+  modelN<-length(LogModel$fitted.values)
+  R.cs<-1-exp(-(nullDev-dev)/modelN) #R2 de Cox y Snell necesario apra el de Nagelkerke
+  R.n<-R.cs/(1-(exp(-(nullDev/modelN))))
+  cat("Cox and Snell R2", round(R.cs, 3), "\n")
+  cat("Nagelkerke R2", round(R.n, 3), "\n")
+}
+
+
+#aplicamos esta funcion a los distintos modelos
+
+pseudo_r2(rgl_null)
+pseudo_r2(rgl_c)
+pseudo_r2(rgl_c_c)
+
 
 
 
