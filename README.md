@@ -606,12 +606,12 @@ Aca vamos a ver la distribucion de edad y sexo por grupo. No consideraremos NSE 
 
 - **Segun sexo**
 
-![Grafico que muestra % de mujeres y hombres en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/porcentaje_sexo_clase.jpg)
+![Grafico que muestra % de mujeres y hombres en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/procentaje_sexo_clase.jpg)
 
 
 -**Segun grupo etario**
 
-![Grafico que muestra % de personas de cada grupo etaria en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/porcentaje_edad_clase.jpg)
+![Grafico que muestra % de personas de cada grupo etaria en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/procentaje_edad_clase.jpg)
 
 
 - ## **Regresiones logística**
