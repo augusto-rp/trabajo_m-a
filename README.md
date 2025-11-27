@@ -822,3 +822,24 @@ Esta es una conclusión super importante, y de la cuál no nos habríamos percat
  
  
 </details>
+
+
+<details>
+<summary>DIAPOSITIVAS</summary>
+
+![primera diapositiva: correlaciones positivas de confianza insitucional con todo](https://github.com/augusto-rp/trabajo_m-a/blob/main/presentaciones_ppt/diapo1.jpg)
+
+
+![segunda diapositiva: 3 clases de percepcion economica. la mitad sostenimiento, 24.47% optimistas a futuro y %26.26 pesimistas](https://github.com/augusto-rp/trabajo_m-a/blob/main/presentaciones_ppt/diapo2.jp)
+
+
+![tercera diapositiva: % de hombres y mujeres en cada clase y como cada sector etaria se distribuye](https://github.com/augusto-rp/trabajo_m-a/blob/main/presentaciones_ppt/diapo3.jp)
+
+
+![cuarta diapositiva: conclusiones sobre significancia predictor de clase y confianza en apoyo a la democracia](https://github.com/augusto-rp/trabajo_m-a/blob/main/presentaciones_ppt/diapo4.jp)
+
+
+![quinta diapositiva: problema con usar clases es que oscure que hay componentes de percepcion economica que no son relevantes](https://github.com/augusto-rp/trabajo_m-a/blob/main/presentaciones_ppt/diapo5.jp)
+
+
+</details>
