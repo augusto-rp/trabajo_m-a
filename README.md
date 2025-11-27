@@ -735,7 +735,7 @@ Los resultados se presentan en la siguiente tabla.
 
 ⭐  **Conclusión 1**⭐ 
 
-Existe una correlación positiva entre la confianza instituciones y variables de percepción de crecimiento económico.
+**Existe una correlación positiva entre la confianza instituciones y variables de percepción de crecimiento económico.**
 
 👁️OJO: Esto son solo correlaciones, no podemos sacar conclusiones de si una cosa causa la otra, o por qué sucede esta relación.
 
@@ -747,7 +747,8 @@ Existe una correlación positiva entre la confianza instituciones y variables de
  Para ello se realizó un análisis de clases latentes (LCA) usando las variables de percepción económica presente y futura del país y personales.
  
  ⭐  **Conclusión 2**⭐ 
- Los análisis mostraron que la mejor forma de caracterizar la población es en 3 grupos:
+ 
+ **Los análisis mostraron que la mejor forma de caracterizar la población es en 3 grupos:**
  
  - CLASE 1 24.47% "OPTIMISTA A FUTURO"
 
@@ -782,8 +783,8 @@ Se realizaron análisis estadísticos que muestran que el porcentaje de hombres 
 
 Los análisis estadísticos muestran que:
 
-- ~Las personas de 18-29 tienen un mayor numero de optimistas y menor numero de pesimistas que lo esperado~
-- ~Las personas mayores a 65 años tienen un mayor numero de pesimistas que lo esperado~
+- 👦 Las personas de 18-29 tienen un mayor numero de optimistas y menor numero de pesimistas que lo esperado
+- 👨‍🦳 Las personas mayores a 65 años tienen un mayor numero de pesimistas que lo esperado
 
 ### Luego de este paso nos preguntamos
 
@@ -794,12 +795,12 @@ Se realizaron distintos modelos usando regresiones lineales para evaluar ello.
 
 En un primer modelo que solo toma la pertenencia a clases como predictora tenemos que
 
-**Una persona pesimista tiene una probabilidad de 30.34% de de apoyar la democracia en constante con una probabilidad de 51.5% por parte de las personas optimistas**
+- **Una persona pesimista tiene una probabilidad de 30.34% de de apoyar la democracia en constante con una probabilidad de 51.5% por parte de las personas optimistas**
 
 Se realizó un segundo modelo donde además de la clase se usó la confianza institucional (variable construida en paso anterior) como segundo predictor.
 Este modelo aporta evidencia de que:
 
-**Una persona pesimista tiene una probabilidad de 10.70% de apoyar la democracia en contraste al 17.25% de apoyo a la democracia para optimistas y un punto de aumento en la confianza institucional aumenta en un 126.16% las probabilidades de apoyar la democracia**
+- **Una persona pesimista tiene una probabilidad de 10.70% de apoyar la democracia en contraste al 17.25% de apoyo a la democracia para optimistas y un punto de aumento en la confianza institucional aumenta en un 126.16% las probabilidades de apoyar la democracia**
 
 
  ⭐  **Conclusión  3**⭐ 
@@ -808,7 +809,7 @@ Este modelo aporta evidencia de que:
 Además la confianza institucional es en sí misma un predictor significativo de apoyo a la democracia.**
  
  
- ##SIN EMBARGO##
+ ## SIN EMBARGO ##
  
  ## ¡Las clases esconden un secreto! 👀
  
