@@ -13,7 +13,7 @@ library(stargazer)#comparar log de regresiones
 library(chisq.posthoc.test)#comparacion chi cuadrado
 
 
-base<-read.csv("bd/base_93.csv", header=T)
+base<-read.csv("bd/base_93.csv", header=T)  #use la 93 que es marzo-abril 2025 (año electoral), la 89 es junio-julio 2023
 #Vamos a hacer una seleccion de las variables que nos interesan
 #VD: Apoyo a democracia (democracia_21)
 #VI: Situacion economica presente (percepcion_2) y futura (percepcion_3), situacion economica personal presente (percepcion_5) y futura (percepcion_6)
@@ -31,8 +31,9 @@ df <- base[, c("id_bu", "sexo", "edad", "eval_gob_1", "percepcion_2", "percepcio
 
 
 ##si valor es -8 o -9 remplazar por NA
-df[df == -8 | df == -9 | df ==88 | df==99] <- NA
+df[df == -8 | df == -9 | df ==88 | df==99| df ==8 | df==9] <- NA
 
+describe(df)
 
 #Datos perdidos
 na.test(df) #difernecias son significativas por lo que datos perdidos no son aletaorios
@@ -293,21 +294,21 @@ objetoLCA_6<-poLCA(variables, df, nclass=6, nrep=50, maxiter=1000, graphs=T) #no
 #Dato que 6 clases no covnerge podemso ignorarlo y comparar de 2 a 5 clases
 #Modelo de 5 clases tiene un clase con solo 4%
 
-valor = c(objetoLCA_3$aic,objetoLCA_4$aic,
-          objetoLCA_3$bic,objetoLCA_4$bic)
+valor = c(objetoLCA_3$aic,objetoLCA_4$aic,objetoLCA_2$aic,
+          objetoLCA_3$bic,objetoLCA_4$bic,objetoLCA_2$aic)
 
-indice = c("aic", "aic", 
-           "bic", "bic")
+indice = c("aic", "aic", "aic",
+           "bic", "bic","bic")
 
-cantidad = c("3c", "4c", 
-             "3c", "4c")
+cantidad = c("3c", "4c","2c", 
+             "3c", "4c","2c")
 
 n_clases = cbind.data.frame(cantidad,indice,valor)
 n_clases #bic castiga ams en muestras grandes
 
 #comparar ajuste modelos de 2 a 5 clases
 
-
+#en datos del 2023 mejor aprece ser de 2 clases
 
 
 #4. Seleccionar modelo optimo considerando ajuste estadistico y interpretabilidad
@@ -325,7 +326,8 @@ n_clases #bic castiga ams en muestras grandes
 rm(list=c("cor_matrix", "cor_matrix2","objetoLCA_2","objetoLCA_5","objetoLCA_6", "mr"))
 
 poLCA.entropy(objetoLCA_3) #valores no estandrizados ni normalizados, mas alto es mejor
-poLCA.entropy(objetoLCA_4)
+poLCA.entropy(objetoLCA_4) #en modelo del 2023 optimistas son 3, 2 estable y 1 pesimistas
+poLCA.entropy(objetoLCA_2) #tambien el mas alto es el de 2 clases en 2023!!!
 
 objetoLCA_3
 
@@ -392,6 +394,8 @@ table(df$sexo, df$clase_3)
 ct_3<-xtabs(~sexo + clase_3, data=df)
 CrossTable(ct_3,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
 
+#en 2023 pareceiera ser que hombres son mas pesimsitas
+
 
 table(df$sexo, df$clase_4)
 ct<-xtabs(~sexo + clase_4, data=df)
@@ -432,6 +436,8 @@ CrossTable(ct_edad,expected=T, prop.c=F, prop.r=F,prop.t=F,chisq=TRUE)
 posthoc_results <- chisq.posthoc.test(ct_edad, method = "holm")
 print(posthoc_results)
 
+
+#en 2023 gente joven se ve menis pesimistas de lo esperado
 
 # ANOVA -------------NO HACER ESTO---------------------------------------
 #ojo que aca democracia_12 se toma como variable numerica, que en verdad no lo es
@@ -543,6 +549,7 @@ pseudo_r2(modelo_c_c)
 
 stargazer(modelo, modelo_c_c, type="text", align =T,digits = 4)
 
+exp(0.36423)
 
 
 
