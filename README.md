@@ -706,7 +706,7 @@ Por lo tanto algo importante a concluir de todo este esfuerzo es
 
 
 <details>
-<summary>REPORTE RESULTADOS v.abrevida</summary>
+<summary>REPORTE RESULTADOS v.abreviada</summary>
 
 # Reporte Resultados- version abrevida
 
@@ -745,6 +745,8 @@ Existe una correlación positiva entre la confianza instituciones y variables de
 **Identificar distintos patrones de evaluación de la situación económica personal y del país, y su asociación con el apoyo a la democracia**
 
  Para ello se realizó un análisis de clases latentes (LCA) usando las variables de percepción económica presente y futura del país y personales.
+ 
+ ⭐  **Conclusión 2**⭐ 
  Los análisis mostraron que la mejor forma de caracterizar la población es en 3 grupos:
  
  - CLASE 1 24.47% "OPTIMISTA A FUTURO"
@@ -762,8 +764,60 @@ y que no creen que vaya a cambiar.
 Son personas que ven la situación económica del áis y personal por debajo del promedio,
 y que creen que tanto el país o su situación se mantendrá o empeorara.
 
-** Y cómo son estos grupos?**
+**¿Y cómo son estos grupos?**
+
+Caracterizamos estos grupos de acuerdo a edad y sexo. No lo hicimos por NSE debido a que al muestra tiene muy pocos datos de los sectores más pobres.
+
+- **¿Que % de hombres  y mujeres pertenecen a cada clase?**
+
+![Grafico que muestra % de mujeres y hombres en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/procentaje_sexo_clase.jpg)
+
+Se realizaron análisis estadísticos que muestran que el porcentaje de hombres y mujeres en cada clase no se diferencia de lo esperado.
 
 
 
+-**¿Qué % de personas en cada grupo etaria pertenece a cada clase?**
+
+![Grafico que muestra % de personas de cada grupo etaria en cada clase](https://github.com/augusto-rp/trabajo_m-a/blob/main/graficos%20e%20imagenes/procentaje_edad_clase.jpg)
+
+Los análisis estadísticos muestran que:
+
+- ~Las personas de 18-29 tienen un mayor numero de optimistas y menor numero de pesimistas que lo esperado~
+- ~Las personas mayores a 65 años tienen un mayor numero de pesimistas que lo esperado~
+
+### Luego de este paso nos preguntamos
+
+**¿Estas clases predicen distintos niveles de apoyo a la democracia?**
+
+Para ello asumimos que el apoyo a la democracia es una respuesta binaria: o se apoya siempre, o es un apoyo condicional.
+Se realizaron distintos modelos usando regresiones lineales para evaluar ello.
+
+En un primer modelo que solo toma la pertenencia a clases como predictora tenemos que
+
+**Una persona pesimista tiene una probabilidad de 30.34% de de apoyar la democracia en constante con una probabilidad de 51.5% por parte de las personas optimistas**
+
+Se realizó un segundo modelo donde además de la clase se usó la confianza institucional (variable construida en paso anterior) como segundo predictor.
+Este modelo aporta evidencia de que:
+
+**Una persona pesimista tiene una probabilidad de 10.70% de apoyar la democracia en contraste al 17.25% de apoyo a la democracia para optimistas y un punto de aumento en la confianza institucional aumenta en un 126.16% las probabilidades de apoyar la democracia**
+
+
+ ⭐  **Conclusión  3**⭐ 
+ 
+**La  pertenencia a la clase de pesimistas es un predictor significativo de reducción en el apoyo a la democracia, incluso al controlar por confianzaz en las instituciones.
+Además la confianza institucional es en sí misma un predictor significativo de apoyo a la democracia.**
+ 
+ 
+ ##SIN EMBARGO##
+ 
+ ## ¡Las clases esconden un secreto! 👀
+ 
+ Las clases son agrupaciones de 4 variables de percepción económica distintas, sin embargo, si usamos estas variables de forma separada como predictoras de apoyo a la democracia.
+ ¡Resulta que solo las variables de percepción económica del país impacta en el apoyo a la democracia!
+ 
+Es decir, cómo las personas perciben su propia situación económica presente o futura no incide en su disposición a apoyar la democracia.
+Esta es una conclusión super importante, y de la cuál no nos habríamos percatado si nos hubieramos quedado solo con el análisis previo.
+
+ 
+ 
 </details>
