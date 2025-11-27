@@ -843,3 +843,37 @@ Esta es una conclusión super importante, y de la cuál no nos habríamos percat
 
 
 </details>
+
+
+<details>
+<summary>ENTREGA FINAL</summary>
+
+## Cambios en diseño a lo largo de trabajo
+
+
+
+## Dificultades con base de datos
+
+
+
+## Fuentes de informacion
+
+
+
+## Declaracion de uso de IA
+Se usó  IA DeepSeek-V3.2-Exp en conjunto con Copilot como herramienta de apoyo en tres áreas principales: para la generación y optimización de códigos de análisis en R; para el formateo y estructuración de texto en formato Markdown;
+y para asistencia en fórmulas matemáticas relacionadas con cálculos de odds, probabilidades y sus conversiones.
+
+
+
+## Resultados y visualización
+
+Revisar secciones anteriores
+
+
+
+## Recomendaciones futuras
+
+
+
+</details>
