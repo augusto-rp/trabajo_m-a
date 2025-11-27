@@ -13,7 +13,7 @@ library(stargazer)#comparar log de regresiones
 library(chisq.posthoc.test)#comparacion chi cuadrado
 
 
-base<-read.csv("bd/base_93.csv", header=T)  #use la 93 que es marzo-abril 2025 (año electoral), la 89 es junio-julio 2023
+base<-read.csv("bd/base_89.csv", header=T)  #use la 93 que es marzo-abril 2025 (año electoral), la 89 es junio-julio 2023
 #Vamos a hacer una seleccion de las variables que nos interesan
 #VD: Apoyo a democracia (democracia_21)
 #VI: Situacion economica presente (percepcion_2) y futura (percepcion_3), situacion economica personal presente (percepcion_5) y futura (percepcion_6)
@@ -281,7 +281,7 @@ variables<- cbind(percepcion_2, percepcion_3, percepcion_5, percepcion_6) ~ 1 #(
 #PROCEDA CON CONSIDERACION A ESO
 
 set.seed(3141)
-objetoLCA_2<-poLCA(variables, df, nclass=2, nrep=100, maxiter=1000, graphs=T)
+objetoLCA_2<-poLCA(variables, df, nclass=2, nrep=100, maxiter=1000, graphs=T)  #cuando se ahce con datos del 2023 son casi 50/50 optimistas y pesimistas
 set.seed(3141)
 objetoLCA_3<-poLCA(variables, df, nclass=3, nrep=100, maxiter=1000, graphs=T)
 set.seed(3141)
