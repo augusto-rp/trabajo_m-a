@@ -710,5 +710,60 @@ Por lo tanto algo importante a concluir de todo este esfuerzo es
 
 # Reporte Resultados- version abrevida
 
+## Este proyecto tenia dos objetivos principales
+
+### En primer lugar 
+
+**Analizar la relación entre confianza institucional y percepción de desarrollo económico del país**
+
+
+Para responder esto se creó un único item promediando los niveles de confianza en 5 instituciones distintas (congreso, gobierno, municipalidades, tribunales y fiscalia).
+En general la confianza en instituciones se mueve en una misma direccion, por lo que se dice que tienen alga consistencia interna.
+
+Posterior a ello se midieron las correlaciones de este item de confianza en instituciones con variables de percepción económica tanto a nivel país como a nivel personal, así como con percepción de progreso del país.
+Los resultados se presentan en la siguiente tabla.
+
+| Variable | 1 | 2 | 3 | 4 | 5 | 6 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+|**1)	Percepción situación económico presente del país**|1| | | | | |
+|**2)	Percepción situación económica futura del país**|0.33|1| | | | |
+|**3)	Percepción progreso del país**|0.44|0.35|1| | | |
+|**4)	Percepción situación económico personal presente**|0.25|0.14|.20|1| | |
+|**5)	Percepción situación económico personal futura**|0.17|0.25|0.17|0.18|1| |
+|**6)	Confianza en instituciones**|0.32|0.25|0.30|0.18|0.20|1|
+
+
+⭐  **Conclusión 1**⭐ 
+
+Existe una correlación positiva entre la confianza instituciones y variables de percepción de crecimiento económico.
+
+👁️OJO: Esto son solo correlaciones, no podemos sacar conclusiones de si una cosa causa la otra, o por qué sucede esta relación.
+
+
+### En segundo lugar 
+
+**Identificar distintos patrones de evaluación de la situación económica personal y del país, y su asociación con el apoyo a la democracia**
+
+ Para ello se realizó un análisis de clases latentes (LCA) usando las variables de percepción económica presente y futura del país y personales.
+ Los análisis mostraron que la mejor forma de caracterizar la población es en 3 grupos:
+ 
+ - CLASE 1 24.47% "OPTIMISTA A FUTURO"
+
+Son personas que no necesariamente ven su situacion económica actual ni la del país como buena, 
+pero que creen muestrna niveles de optimismo a futuro.
+
+- CLASE 2 49.27% "SOSTENIMIENTO"
+
+Son personas que actualmente ven la situación económica del áis y personal en el promedio o ligeramente mala,
+y que no creen que vaya a cambiar.
+
+- CLASE 3 26.26% "PESIMISTAS"
+
+Son personas que ven la situación económica del áis y personal por debajo del promedio,
+y que creen que tanto el país o su situación se mantendrá o empeorara.
+
+** Y cómo son estos grupos?**
+
+
 
 </details>
