@@ -850,30 +850,44 @@ Esta es una conclusión super importante, y de la cuál no nos habríamos percat
 
 ## Cambios en diseño a lo largo de trabajo
 
+- Inicialmente el trabajo planeó hacer un **Análisis de Perfiles Latentes (LPA)** en vez de uno de clases(LCA). A diferencia del de clases, el LPA usa variables continuas para la clasificación de los individuos. Sin emabrgo, dado el bajo rango de respuestas posibles en las variables de itneres (escalas liekrt de no mas de 5 valores, y otras de 3) se decidió tratar a estar variables como si fueran categóricas lo que implicó una modificación del tipo de análisis multivariado.
+
+- Además, se decidió incluir un segundo grupo de modelos de regresión logísticas en que se estimó el efecto de las variables de percepción económica de forma separada, esto con el fin de comparar los efectos entre este modelo y otro que agrupaba estas variables en distintas clases. Esto resultó ser un paso importante, ya que muestra que la rgl con clases **PIERDE** información comparado con el otro modelo.   
 
 
 ## Dificultades con base de datos
 
+- No se reportaron dificultades significativas en el manejo de base de datos. Toda la información se encuentra disponible en [la página de la CEP](https://www.cepchile.cl/opinion-publica/encuesta-cep/)
 
 
 ## Fuentes de informacion
 
+-Se revisó literatura (referenciada en primer segmento de este índice) sobre factores que inciden en el apoyo a la democracia entendida como una forma difusa de apyoo a la democracia.
+Además se revisó literatura para la elaboración de análisis LCA/LPA
+Ferguson, S. L., G. Moore, E. W., & Hull, D. M. (2020). Finding latent groups in observed data: A primer on latent profile analysis in Mplus for applied researchers. International Journal of Behavioral Development, 44(5), 458–468. https://doi.org/10.1177/0165025419881721
+
 
 
 ## Declaracion de uso de IA
-Se usó  IA DeepSeek-V3.2-Exp en conjunto con Copilot como herramienta de apoyo en tres áreas principales: para la generación y optimización de códigos de análisis en R; para el formateo y estructuración de texto en formato Markdown;
+
+- Se usó  IA DeepSeek-V3.2-Exp en conjunto con Copilot como herramienta de apoyo en tres áreas principales: para la generación y optimización de códigos de análisis en R; para el formateo y estructuración de texto en formato Markdown;
 y para asistencia en fórmulas matemáticas relacionadas con cálculos de odds, probabilidades y sus conversiones.
 
 
 
 ## Resultados y visualización
 
-Revisar secciones anteriores
+- **Revisar secciones anteriores**
 
 
 
 ## Recomendaciones futuras
 
-
+- Los resultados muestran que la creación de clases de percepción económica no entrega información adicional en la explicación de factores que inciden en el apoyo de la democracia. La información que estas clases entregan es menor que la que se obtiene al tratar cada una de las variables de percepción económica de forma independiente. Esta segunda forma de modelar el apoyo a la democracia muestra que solo la percepción de la situación económica, presente y futura del país tienen efectos significativos sobre la variable de interés, en comparación con la percepción de la situación económica personal presente y futura.
+  
+- **Sin embargo**, esto no significa que no se hayan observado algunos resultados que pueden ser interesantes de profundizar más a futuro. Por ejemplo
+  - La caracterización etaria de las clases muestra una marcada diferencia entre el sector encuestado más joven y el más viejo. Siendo los primeros más optimistas de lo esperado, mientras que los segundos más pesimistas de lo esperado.
+  - Dentro de los distintos modelos LCA que se realizaron se probaron modelos con 2,3, 4,5 y 6 clases. Si bien el modelo de 3 clases mostró tener los mejores indicadores de ajustes el modelo de 4 no se alejaba mucho de sus resultados. Este cuarto modelo se diferencia del que finalmente se eligio al tener una clase de personas que tienen una percepción negativa de la sticuación económica presente del pais pero una visión positiva de su situación económica personal presente y futura (no se observó una tendencia generalizable en esta clase de su visión futura de la economía del país). Si bien, no hay razones para hipotetizar que esta clase tenga niveles distintivos de apoyo a la democracia podría resultar interesante evaluar si hay otras variables de satisfacción con la situación país donde se observe un patrón de respuestas distintivas por parte de este grupo de personas.
+  - Ac
 
 </details>
