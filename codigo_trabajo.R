@@ -13,7 +13,7 @@ library(stargazer)#comparar log de regresiones
 library(chisq.posthoc.test)#comparacion chi cuadrado
 
 
-base<-read.csv("bd/base_89.csv", header=T)  #use la 93 que es marzo-abril 2025 (año electoral), la 89 es junio-julio 2023
+base<-read.csv("bd/base_93.csv", header=T)  #use la 93 que es marzo-abril 2025 (año electoral), la 89 es junio-julio 2023
 #Vamos a hacer una seleccion de las variables que nos interesan
 #VD: Apoyo a democracia (democracia_21)
 #VI: Situacion economica presente (percepcion_2) y futura (percepcion_3), situacion economica personal presente (percepcion_5) y futura (percepcion_6)
